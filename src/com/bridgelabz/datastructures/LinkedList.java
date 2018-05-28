@@ -21,6 +21,7 @@ public class LinkedList<T extends Comparable<T>> {
     }
 
     Node<T> head;
+    int count=0;
 
     /**
      * add data at head position in the linked list
@@ -109,9 +110,22 @@ public class LinkedList<T extends Comparable<T>> {
         }
 
     }
-    public void add(T data ) {
-        Node<T> temp=head;
-    }
+    public void add(T data) {
+		Node<T> new_node = new Node<T>(data);
+		if (head == null) {
+			head = new_node;
+			count++;
+			return;
+		}
+		Node<T> temp = head;
+		while (temp.next != null) {
+			temp = (Node<T>) temp.next;
+
+		}
+		temp.next = new_node;
+		count++;
+	}
+
 
     /**
      * remove data from the linked list

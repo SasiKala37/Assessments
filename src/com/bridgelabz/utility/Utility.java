@@ -22,6 +22,7 @@ import java.util.Scanner;
 import com.bridgelabz.datastructures.Deque;
 import com.bridgelabz.datastructures.LinkedList;
 import com.bridgelabz.datastructures.Queue;
+import com.bridgelabz.datastructures.SortedLinkedList;
 import com.bridgelabz.datastructures.Stack;
 
 public class Utility {
@@ -30,6 +31,7 @@ public class Utility {
 	Stack<Character> stack = new Stack<Character>();
 	Queue<Integer> queue = new Queue<Integer>();
 	Deque<Character> deque = new Deque<Character>();
+	SortedLinkedList<Integer> sortedLinkedList = new SortedLinkedList<Integer>();
 
 	public String userInputString() {
 		return scanner.next();
@@ -1125,9 +1127,7 @@ public class Utility {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Scanner scanner = new Scanner(System.in);
 
-		scanner.close();
 		if (linkedList.search(searchData)) {
 			linkedList.remove(searchData);
 		} else {
@@ -1143,4 +1143,42 @@ public class Utility {
 		printWriter.close();
 	}
 
+	public void orderedFile(int searchNumber) throws FileNotFoundException {
+		File file = new File("/home/bridgelabz/sasi-txtdocuments/numbers.txt");
+		try {
+			BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+			String line = "";
+			int[] number = new int[15];
+			int k = 0;
+			while ((line = bufferedReader.readLine()) != null) {
+				String[] words = line.split(",");
+				for (int i = 0; i < words.length; i++) {
+					number[++k] = Integer.parseInt(words[i]);
+					sortedLinkedList.addSorted(number[k]);
+
+				}
+			}
+
+			System.out.println("File content:");
+			sortedLinkedList.display();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if (sortedLinkedList.search(searchNumber)) {
+			sortedLinkedList.remove(searchNumber);
+			sortedLinkedList.display();
+		} else {
+			sortedLinkedList.addSorted(searchNumber);
+
+		}
+		// System.out.println("Edited file content");
+
+		PrintWriter printWriter = new PrintWriter(file);
+		for (int i = 0; i < sortedLinkedList.size(); i++) {
+
+			printWriter.print(sortedLinkedList.getNth(i) + ",");
+		}
+		printWriter.close();
+
+	}
 }
