@@ -17,8 +17,13 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
+import com.bridgelabz.datastructures.Queue;
+import com.bridgelabz.datastructures.Stack;
+
 public class Utility {
 	public Scanner scanner = new Scanner(System.in);
+	Stack<Character> stack = new Stack<Character>();
+	Queue<Integer> queue = new Queue<Integer>();
 
 	public String userInputString() {
 		return scanner.next();
@@ -414,15 +419,13 @@ public class Utility {
 	 * @return
 	 */
 	public static boolean isAnagram(String firstString, String secondString) {
-		 firstString = removeSpace(firstString);
-		 secondString = removeSpace(secondString);
+		firstString = removeSpace(firstString);
+		secondString = removeSpace(secondString);
 		if (firstString.length() != secondString.length()) {
 			return false;
 		}
-		firstString = toLowerCase(firstString);
-		//System.out.println(firstString);
-		secondString = toLowerCase(secondString);
-		//System.out.println(secondString);
+		firstString = firstString.toLowerCase();
+		secondString = secondString.toLowerCase();
 		boolean result = checkString(firstString, secondString);
 		return result;
 
@@ -437,37 +440,15 @@ public class Utility {
 	public static String removeSpace(String inputString) {
 		char[] charString = inputString.toCharArray();
 		inputString = "";
-		//System.out.println("Space removed String");
 		for (int i = 0; i < charString.length; i++) {
 			if (charString[i] != ' ') {
 				inputString = inputString + charString[i];
 			}
-			// System.out.print(charString[i]);
 		}
-		// System.out.println();
 		return inputString;
 	}
 
-	/**
-	 * To convert the upper case to lower case characters
-	 * 
-	 * @param inputString
-	 * @return
-	 */
-	public static String toLowerCase(String inputString) {
-		char[] charString = inputString.toCharArray();
-		//System.out.println("Changed Lower case String");
-		for (int i = 0; i < charString.length; i++) {
-			if (charString[i] >= 65 || charString[i] <= 91) {
-				charString[i] += 32;
-			}
-			// System.out.print(charString[i]);
-		}
-		// System.out.println();
-		return new String(charString);
-	}
-
-	/**
+	/****************************************
 	 * check whether the given strings are having same characters
 	 * 
 	 * @param firstString
@@ -479,9 +460,8 @@ public class Utility {
 		char[] charString2 = secondString.toCharArray();
 		charString1 = sortChar(charString1);
 		charString2 = sortChar(charString2);
-		//System.out.println("LowerCase String:" + lowerCaseString1 + " " + loweraseString2);
-		
-		for (int i = 0; i < charString2.length; i++) {
+
+		for (int i = 0; i < charString1.length; i++) {
 			if (charString1[i] != charString2[i]) {
 				return false;
 			}
@@ -495,9 +475,7 @@ public class Utility {
 	 * @param charString
 	 * @return
 	 */
-	public static char[] sortChar(char charString[]) {
-		//System.out.println("Sorted String");
-		// String result="";
+	public static char[] sortChar(char[] charString) {
 		for (int i = 0; i < charString.length; i++) {
 			for (int j = i + 1; j < charString.length; j++) {
 				if (charString[i] > charString[j]) {
@@ -505,7 +483,6 @@ public class Utility {
 					charString[i] = charString[j];
 					charString[j] = temp;
 				}
-				// System.out.println(charString[j]);
 			}
 		}
 		return charString;
@@ -569,6 +546,7 @@ public class Utility {
 		} else {
 			return searchGuessNumber(mid, high);
 		}
+
 	}
 
 	/**
@@ -730,10 +708,9 @@ public class Utility {
 	 * @param number
 	 * @return
 	 */
-	public static int binary(int number) {
-		if (number < 127) {
-			StringBuilder stringBuilder = toBinary(number);
-			System.out.println(stringBuilder);
+	public static int binary(int decimalnumber) {
+		if (decimalnumber < 127) {
+			StringBuilder stringBuilder = toBinary(decimalnumber);
 			String newString = stringBuilder.toString();
 			System.out.println(newString);
 			int size = newString.length();
@@ -952,7 +929,7 @@ public class Utility {
 		}
 		printData(data);
 	}
-	
+
 	/**
 	 * to find the word in file using binary search technique
 	 * 
@@ -962,27 +939,83 @@ public class Utility {
 	public void searchWord(String searchString) throws IOException {
 		String filePath = "/home/bridgelabz/sasi-txtdocuments/names.txt";
 		String line = "";
-		int result ;
+		int result;
 
 		try {
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
 			while ((line = bufferedReader.readLine()) != null) {
 				String[] words = line.split(",");
 				bubbleSort(words);
-				result = search(words,searchString, 0, words.length - 1);
+				result = search(words, searchString, 0, words.length - 1);
 
-				if (result==-1) {
+				if (result == -1) {
 					System.out.println("search element found");
 				} else {
 					System.out.println("Search elements not found");
 				}
 
-				bufferedReader.close();
+				// bufferedReader.close();
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 
-}
+	}
+
+	public void checkBalancedParenthesis(String expression) {
+		char[] expOperand = expression.toCharArray();
+		int size = 0;
+		for (int i = 0; i < expOperand.length; i++) {
+			if (expOperand[i] == '(') {
+				stack.push(expOperand[i]);
+				size++;
+			}
+			if (expOperand[i] == ')') {
+				stack.pop();
+				size--;
+			}
+
+		}
+		if (size == 0) {
+			System.out.println("Arithmetic expression is Balanced\n" + stack.isEmpty());
+		} else {
+			System.out.println("Arithmetic expression is unBalanced " + stack.isEmpty());
+		}
+	}
+
+	public void maintainCashBalance(int numberOfPersons, double balance) {
+		int[] person = new int[numberOfPersons];
+		double withdraw;
+		double deposit;
+		for (int i = 0; i < person.length; i++) {
+			queue.enqueue(person[i]);
+		}
+		for (int i = 0; i <person.length; i++) {
+			System.out.println("Queue opertions");
+			System.out.println("1: withdraw");
+			System.out.println("2.Deposit");
+			System.out.println("Enter your choice");
+			int choice = userInputInteger();
+			switch (choice) {
+			case 1:
+				System.out.println("Enter the amount to withdraw");
+				withdraw = userInputDouble();
+				balance = balance - withdraw;
+				System.out.println("cacsh balance:" + balance);
+				queue.dequeue();
+				break;
+			case 2:
+				System.out.println("Enter the amount to deposit");
+				deposit = userInputDouble();
+				balance = balance + deposit;
+				System.out.println("cacsh balance:" + balance);
+				queue.dequeue();
+				break;
+				default:
+					System.out.println("input mismatch");
+					break;
+			}
+		}
+	}
 
 }
