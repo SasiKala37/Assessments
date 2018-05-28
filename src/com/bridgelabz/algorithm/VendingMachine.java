@@ -8,7 +8,7 @@ public class VendingMachine {
 		Utility utility=new Utility();
 		System.out.println("Enter some amount");
 		int amount=utility.userInputInteger();
-		//Utility.generateChange(amount);
+		Utility.generateChange(amount);
 	}
 
 }

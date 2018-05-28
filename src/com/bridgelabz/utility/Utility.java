@@ -11,19 +11,25 @@
 package com.bridgelabz.utility;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Scanner;
 
+import com.bridgelabz.datastructures.Deque;
+import com.bridgelabz.datastructures.LinkedList;
 import com.bridgelabz.datastructures.Queue;
 import com.bridgelabz.datastructures.Stack;
 
 public class Utility {
 	public Scanner scanner = new Scanner(System.in);
+	LinkedList<String> linkedList = new LinkedList<String>();
 	Stack<Character> stack = new Stack<Character>();
 	Queue<Integer> queue = new Queue<Integer>();
+	Deque<Character> deque = new Deque<Character>();
 
 	public String userInputString() {
 		return scanner.next();
@@ -550,6 +556,47 @@ public class Utility {
 	}
 
 	/**
+	 * generate the notes in descending order
+	 * 
+	 * @param amount
+	 */
+	public static void generateChange(int amount) {
+		int[] ar = { 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000 };
+		int temp = 0;
+		int index = 0;
+		int count = 0;
+		for (int i = 0; i < ar.length; i++) {
+			if (amount == ar[i]) {
+				System.out.println("The amount note ");
+				System.out.println(amount);
+				count++;
+				return;
+			}
+		}
+
+		for (int i = 0; i < ar.length; i++) {
+			for (int j = i + 1; j < ar.length; j++) {
+				if (amount < ar[j] && amount > ar[j] || amount > ar[i]) {
+					temp = ar[i];
+					index = i;
+					break;
+				}
+			}
+		}
+
+		System.out.print(temp + "  ");
+		int goal = amount - temp;
+		for (int i = index; i >= 0; i--) {
+			if (goal == ar[i]) {
+				System.out.print(ar[i] + "  ");
+				return;
+			}
+
+		}
+		generateChange(goal);
+	}
+
+	/**
 	 * convert celsius to fahrenheit temperature
 	 * 
 	 * @param temperatureInCelsius
@@ -962,6 +1009,9 @@ public class Utility {
 
 	}
 
+	/**
+	 * @param expression
+	 */
 	public void checkBalancedParenthesis(String expression) {
 		char[] expOperand = expression.toCharArray();
 		int size = 0;
@@ -983,14 +1033,19 @@ public class Utility {
 		}
 	}
 
+	/**
+	 * @param numberOfPersons
+	 * @param balance
+	 */
 	public void maintainCashBalance(int numberOfPersons, double balance) {
 		int[] person = new int[numberOfPersons];
 		double withdraw;
 		double deposit;
-		for (int i = 0; i < person.length; i++) {
-			queue.enqueue(person[i]);
+		;
+		for (int i = 1; i <= person.length; i++) {
+			queue.enqueue(i);
 		}
-		for (int i = 0; i <person.length; i++) {
+		for (int i = 1; i <= person.length; i++) {
 			System.out.println("Queue opertions");
 			System.out.println("1: withdraw");
 			System.out.println("2.Deposit");
@@ -1000,8 +1055,12 @@ public class Utility {
 			case 1:
 				System.out.println("Enter the amount to withdraw");
 				withdraw = userInputDouble();
-				balance = balance - withdraw;
-				System.out.println("cacsh balance:" + balance);
+				if (balance >= withdraw) {
+					balance = balance - withdraw;
+					System.out.println("cacsh balance:" + balance);
+				} else {
+					System.out.println("Insufficient balance");
+				}
 				queue.dequeue();
 				break;
 			case 2:
@@ -1011,11 +1070,77 @@ public class Utility {
 				System.out.println("cacsh balance:" + balance);
 				queue.dequeue();
 				break;
-				default:
-					System.out.println("input mismatch");
-					break;
+			default:
+				System.out.println("input mismatch");
+				break;
 			}
 		}
+	}
+
+	/**
+	 * @param input
+	 * @return
+	 */
+	public boolean checkPalindrome(String input) {
+
+		char[] inputChar = input.toCharArray();
+		boolean equalChars = true;
+		char first;
+		char last;
+		for (int i = 0; i < inputChar.length; i++) {
+			deque.insertAtRear(inputChar[i]);
+		}
+
+		while (deque.size() > 1 && equalChars) {
+			first = deque.dequeueAtFront();
+			last = deque.dequeueAtRear();
+
+			if (first == last) {
+				equalChars = true;
+			}
+		}
+		return equalChars;
+	}
+
+	/**
+	 * @param searchData
+	 * @throws FileNotFoundException
+	 */
+	public void unorderedFile(String searchData) throws FileNotFoundException {
+		File file = new File("/home/bridgelabz/sasi-txtdocuments/names.txt");
+
+		try {
+			BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+			String line = "";
+			while ((line = bufferedReader.readLine()) != null) {
+				String[] words = line.split(",");
+				for (int i = 0; i < words.length; i++) {
+					linkedList.addLast(words[i]);
+
+				}
+			}
+			bufferedReader.close();
+			System.out.println("File content:");
+			linkedList.traverse();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Scanner scanner = new Scanner(System.in);
+
+		scanner.close();
+		if (linkedList.search(searchData)) {
+			linkedList.remove(searchData);
+		} else {
+			linkedList.addLast(searchData);
+		}
+		System.out.println("Edited file content");
+		linkedList.traverse();
+		PrintWriter printWriter = new PrintWriter(file);
+		for (int i = 1; i <= linkedList.size(); i++) {
+			String word = linkedList.getIndexValue(i);
+			printWriter.print(word + ",");
+		}
+		printWriter.close();
 	}
 
 }
