@@ -21,11 +21,13 @@ import java.util.Scanner;
 
 import com.bridgelabz.datastructures.Deque;
 import com.bridgelabz.datastructures.LinkedList;
+import com.bridgelabz.datastructures.Map;
 import com.bridgelabz.datastructures.Queue;
 import com.bridgelabz.datastructures.SortedLinkedList;
 import com.bridgelabz.datastructures.Stack;
 
 public class Utility {
+	private static final Exception NumberFormatException = null;
 	public Scanner scanner = new Scanner(System.in);
 	LinkedList<String> linkedList = new LinkedList<String>();
 	Stack<Character> stack = new Stack<Character>();
@@ -137,7 +139,7 @@ public class Utility {
 	public static double nthHarmonicValue(int nthTermNumber) {
 		double result = 0;
 		for (int i = 1; i <= nthTermNumber; i++) {
-			result += (double) (1 / i);
+			result += (double) (1.0) / i;
 		}
 		return result;
 	}
@@ -426,7 +428,7 @@ public class Utility {
 	 * @param secondString
 	 * @return
 	 */
-	public static boolean isAnagram(String firstString, String secondString) {
+	public static <T extends Comparable<T>> boolean isAnagram(String firstString, String secondString) {
 		firstString = removeSpace(firstString);
 		secondString = removeSpace(secondString);
 		if (firstString.length() != secondString.length()) {
@@ -1181,4 +1183,214 @@ public class Utility {
 		printWriter.close();
 
 	}
+
+	/**
+	 * @throws Exception
+	 */
+	public void searchInHashMap() throws Exception {
+		File file = new File("/home/bridgelabz/sasi-txtdocuments/numbers.txt");
+		Map<Integer, Integer> map = new Map<>();
+		int[] number = new int[15];
+		try {
+			BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+			String line = "";
+			int k = 0;
+			int remainder = 0;
+			while ((line = bufferedReader.readLine()) != null) {
+				String[] words = line.split(",");
+				for (int i = 0; i < words.length; i++) {
+					number[++k] = Integer.parseInt(words[i], 10);
+					remainder = number[i] % words.length;
+					map.put(remainder, number[i]);
+					// throw NumberFormatException;
+
+				}
+			}
+
+			System.out.println("File content:");
+			for (int i = 0; i < number.length; i++) {
+				System.out.println(map.get(i));
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Enter the search number");
+		int searchNumber = userInputInteger();
+		int search = map.get(searchNumber);
+		if (search == searchNumber) {
+			map.remove(searchNumber);
+
+		} else {
+			map.put(searchNumber % number.length, searchNumber);
+
+		}
+		// System.out.println("Edited file content");
+
+		PrintWriter printWriter = new PrintWriter(file);
+		for (int i = 0; i < map.size(); i++) {
+
+			printWriter.print(map.get(i) + ",");
+		}
+		printWriter.close();
+
+	}
+
+	public static int[] findPrime(int low, int high) {
+		int flag;
+		int count = 0;
+		int k = 0;
+		int[] prime = new int[35];
+		if (high < 2) {
+			return null;
+		}
+		if (low == 0) {
+			low = 2;
+		}
+		for (int i = low; i <= high; i++) {
+			flag = 0;
+			for (int j = 2; j <= i / 2; j++) {
+				if (i % j == 0) {
+					flag = 1;
+					break;
+				}
+			}
+			if (flag == 0) {
+				count++;
+				prime[k++] = i;
+			}
+		}
+		return prime;
+	}
+
+	public static int[][] twoDPrime() {
+		int[][] prime = new int[10][30];
+		int low = 0;
+		int high = 0;
+		int k = 0;
+
+		for (int i = 0; i < prime.length; i++) {
+			low = high;
+			high = low + 100;
+			int[] result = findPrime(low, high);
+			for (int j = 0; j < prime[i].length; j++) {
+				prime[i][j] = result[k++];
+				// System.out.print(prime[i][j]+" ");
+				if (result[k] == 0) {
+					break;
+				}
+
+			}
+			k = 0;
+			// System.out.println();
+		}
+		return prime;
+	}
+
+	public static int[][] checkAngram() {
+
+		int[][] anagram = new int[10][];
+		int k = 0;
+		int l = 0;
+		int low = 0, high = 0;
+		for (int m = 0; m < anagram.length; m++) {
+			low = high;
+			high = low + 100;
+			int[] primes = findPrime(low, high);
+
+			for (int i = 0; i < primes.length; i++) {
+				for (int j = i+1; j < primes.length-1; j++) {
+					boolean result = isAnagram(Integer.toString(primes[i]), Integer.toString(primes[j]));
+					if (result) {
+						anagram[k][l++] = primes[i];
+						anagram[k][l++] = primes[j];
+					}
+					if (primes[i] == 0 || primes[j] == 0) {
+						break;
+					}
+				}
+				k++;
+			}
+		}
+		return anagram;
+	}
+
+	public static int day(int month, int day, int year) {
+		int y = year - (14 - month) / 12;
+		int x = y + y / 4 - y / 100 + y / 400;
+		int m = month + 12 * ((14 - month) / 12) - 2;
+		int d = (day + x + (31 * m) / 12) % 7;
+		return d;
+	}
+
+	public static boolean isLeapYear(int year) {
+		if ((year % 4 == 0) && (year % 100 != 0))
+			return true;
+		if (year % 400 == 0)
+			return true;
+		return false;
+	}
+
+	public static void printCalender(int month, int year) {
+		String[] months = { "", // leave empty so that months[1] = "January"
+				"January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
+				"November", "December" };
+		int[] days = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+		// check for leap year
+		if (month == 2 && isLeapYear(year)) {
+			days[month] = 29;
+		}
+		// print calendar header
+		System.out.println("   " + months[month] + " " + year);
+		System.out.println(" S  M Tu  W Th  F  S");
+
+		// starting day
+		int d = day(month, 1, year);
+
+		// print the calendar
+		for (int i = 0; i < d; i++) {
+			System.out.print("   ");
+		}
+		for (int i = 1; i <= days[month]; i++) {
+			System.out.printf("%2d ", i);
+			if (((i + d) % 7 == 0) || (i == days[month])) {
+				System.out.println();
+			}
+		}
+	}
+
+	/**
+	 * Method to find possible number of binary search trees
+	 *
+	 * @param testCase
+	 */
+	public void numberOfBST(int testCase) {
+		System.out.println("Enter total " + testCase + " number of nodes");
+		int[] array = new int[testCase];
+		for (int i = 0; i < testCase; i++) {
+			array[i] = userInputInteger();
+		}
+
+		for (int i = 0; i < testCase; i++) {
+			double result = (double) treeCount(array[i]);
+			System.out.println(result);
+		}
+
+	}
+
+	public static int treeCount(int number) {
+		int intsum = 0;
+		if (number == 0 || number == 1) {
+			return 1;
+		} else if (number == 2) {
+			return 2;
+		} else {
+			for (int i = 0; i < number; i++) {
+				intsum = intsum + treeCount(i) * treeCount(number - i - 1);
+			}
+			return intsum;
+		}
+	}
+
 }
