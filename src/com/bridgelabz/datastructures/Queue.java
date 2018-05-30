@@ -54,6 +54,7 @@ public class Queue<T extends Comparable<T>> {
 			System.out.println("Empty");
 		}
 		Node<T> temp = front;
+		System.out.println("Queue elements");
 		while (temp != rear.next) {
 			System.out.println(temp.data);
 			temp = temp.next;

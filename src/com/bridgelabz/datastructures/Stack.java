@@ -35,8 +35,9 @@ public class Stack<T extends Comparable<T>> {
 		if (temp == null) {
 			System.out.println("Empty stack");
 		}
+		System.out.println("Pushed Elements: ");
 		while (temp != null) {
-			System.out.println("Pushed Elements: " + temp.data);
+			System.out.println(temp.data);
 			temp = temp.next;
 		}
 	}
@@ -54,6 +55,7 @@ public class Stack<T extends Comparable<T>> {
 			System.out.println("EMpty stack");
 		}
 		Node<T> temp = top;
+		System.out.println(temp.data);
 		top = temp.next;
 		size--;
 	}

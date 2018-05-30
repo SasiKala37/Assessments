@@ -809,14 +809,14 @@ public class Utility {
 	 * search the specific data using binary search
 	 * 
 	 * @param arrayData
-	 *            - reading array of elements
+	 *             reading array of elements
 	 * @param searchElement
-	 *            -the which element user want to search
+	 *            the which element user want to search
 	 * @param low
-	 *            -array first index
+	 *            array first index
 	 * @param high
-	 *            -array last index
-	 * @return -it returns true or false whether the search element is found or not
+	 *            array last index
+	 * @return it returns true or false whether the search element is found or not
 	 */
 	public static <T extends Comparable<T>> Integer search(T[] arrayData, T searchElement, int low, int high) {
 		if (high >= low) {
@@ -837,7 +837,7 @@ public class Utility {
 	 * sort the data using bubble sort technique
 	 * 
 	 * @param data
-	 *            - data array
+	 *             data array
 	 */
 	public static <T extends Comparable<T>> void bubbleSort(T[] data) {
 		for (int i = 0; i < data.length - 1; i++) {
@@ -854,10 +854,10 @@ public class Utility {
 	}
 
 	/**
-	 * print data -print the array of data
+	 * print data print the array of data
 	 * 
 	 * @param data
-	 *            -array data
+	 *            array data
 	 */
 	public static <T extends Comparable<T>> void printData(T[] data) {
 		for (int i = 0; i < data.length; i++) {
@@ -877,7 +877,7 @@ public class Utility {
 	 * Sort the data based on key value(insertion sort)
 	 * 
 	 * @param data
-	 *            -array data to sort
+	 *            array data to sort
 	 */
 	public static <T extends Comparable<T>> void insertionSort(T[] data) {
 		for (int i = 0; i < data.length; i++) {
@@ -900,11 +900,11 @@ public class Utility {
 	 * single array
 	 * 
 	 * @param data
-	 *            - array of data
+	 *             array of data
 	 * @param low
-	 *            -array first index
+	 *            array first index
 	 * @param mid
-	 *            -array last index
+	 *            array last index
 	 * @param high
 	 */
 	public static <T extends Comparable<T>> void merge(T[] data, int low, int mid, int high) {
@@ -960,11 +960,11 @@ public class Utility {
 	 * Sort the data
 	 * 
 	 * @param data
-	 *            - Array of data
+	 *             Array of data
 	 * @param low
-	 *            -array first index
+	 *            array first index
 	 * @param high
-	 *            -array first index
+	 *            array first index
 	 */
 	public static <T extends Comparable<T>> void sort(T[] data, int low, int high) {
 		if (low < high) {
@@ -1145,6 +1145,10 @@ public class Utility {
 		printWriter.close();
 	}
 
+	/**
+	 * @param searchNumber
+	 * @throws FileNotFoundException
+	 */
 	public void orderedFile(int searchNumber) throws FileNotFoundException {
 		File file = new File("/home/bridgelabz/sasi-txtdocuments/numbers.txt");
 		try {
@@ -1240,7 +1244,7 @@ public class Utility {
 		int flag;
 		int count = 0;
 		int k = 0;
-		int[] prime = new int[35];
+		int[] prime = new int[200];
 		if (high < 2) {
 			return null;
 		}
@@ -1260,9 +1264,13 @@ public class Utility {
 				prime[k++] = i;
 			}
 		}
+		// System.out.println(count+" primes");
 		return prime;
 	}
 
+	/**
+	 * @return
+	 */
 	public static int[][] twoDPrime() {
 		int[][] prime = new int[10][30];
 		int low = 0;
@@ -1275,46 +1283,108 @@ public class Utility {
 			int[] result = findPrime(low, high);
 			for (int j = 0; j < prime[i].length; j++) {
 				prime[i][j] = result[k++];
-				// System.out.print(prime[i][j]+" ");
+				System.out.print(prime[i][j] + " ");
+
 				if (result[k] == 0) {
 					break;
 				}
 
 			}
 			k = 0;
-			// System.out.println();
+			System.out.println();
 		}
 		return prime;
 	}
 
-	public static int[][] checkAngram() {
-
-		int[][] anagram = new int[10][];
+	/**
+	 * @return
+	 */
+	public static int[] primeAnagram() {
 		int k = 0;
-		int l = 0;
-		int low = 0, high = 0;
-		for (int m = 0; m < anagram.length; m++) {
+		int low = 0;
+		int high = 0;
+		//int n=0;
+		int[] anagram = new int[200];
+		//int[][] nonanagram = new int[10][];
+		//int[][] anagramArray=new int[10][];
+		for (int l = 0; l < 10; l++) {
 			low = high;
 			high = low + 100;
-			int[] primes = findPrime(low, high);
-
-			for (int i = 0; i < primes.length; i++) {
-				for (int j = i+1; j < primes.length-1; j++) {
-					boolean result = isAnagram(Integer.toString(primes[i]), Integer.toString(primes[j]));
-					if (result) {
-						anagram[k][l++] = primes[i];
-						anagram[k][l++] = primes[j];
+			int[] prime = findPrime(low, high);
+			for (int i = 0; i < prime.length-1; i++) {
+				if(prime[i]==0){
+					break;
+				}
+				for (int j = i + 1; j < prime.length; j++) {
+					
+					if (isAnagram(Integer.toString(prime[i]), Integer.toString(prime[j]))) {
+						anagram[k++] = prime[i];
+						anagram[k++] = prime[j];
+						System.out.print(prime[i] + " " + prime[j] + " ");
 					}
-					if (primes[i] == 0 || primes[j] == 0) {
+					if (prime[j] == 0) {
 						break;
 					}
 				}
-				k++;
+				
 			}
+		System.out.println();
+		}
+		/*for (int i = 0; i < nonanagram.length; i++) {
+			for (int j = 0; j <nonanagram .length; j++) {
+			System.out.print(nonanagram[i][j]);	
+			}
+			System.out.println();
+		}*/
+		return anagram;
+	
+	}
+	public static int[] checkNonAnagram() {
+		int[] prime=findPrime(0, 1000);
+		int k=0;
+		int[] anagram=new int[300];
+		for (int i = 0; i < prime.length-1; i++) {
+			for (int j = i+1; j < prime.length; j++) {
+				if(isAnagram(Integer.toString(prime[i]), Integer.toString(prime[j]))){
+					anagram[k++]=prime[i];
+					anagram[k++]=prime[j];
+				}
+				if(prime[j]==0) {
+					break;
+				}
+			}
+		}
+		for (int i = 0; i < anagram.length; i++) {
+			System.out.println(anagram[i]);
 		}
 		return anagram;
 	}
-
+	public static void nonAngram() {
+		int low=0;int high=100;
+		
+		while(high<1000) {
+		
+		int[] prime=findPrime(low, high);
+		int[] anagram=checkNonAnagram();
+		int j=0;
+		for(int i=0;i<prime.length;i++) {
+			  if(prime[i]==anagram[j++]) {
+				 // System.out.print(prime[i]+" ");
+			  }
+			  
+		  }
+		System.out.println();
+		low=low+100;
+		  high=low+100;
+		}
+	}
+	
+	/**
+	 * @param month
+	 * @param day
+	 * @param year
+	 * @return
+	 */
 	public static int day(int month, int day, int year) {
 		int y = year - (14 - month) / 12;
 		int x = y + y / 4 - y / 100 + y / 400;
@@ -1323,6 +1393,10 @@ public class Utility {
 		return d;
 	}
 
+	/**
+	 * @param year
+	 * @return
+	 */
 	public static boolean isLeapYear(int year) {
 		if ((year % 4 == 0) && (year % 100 != 0))
 			return true;
@@ -1331,6 +1405,10 @@ public class Utility {
 		return false;
 	}
 
+	/**
+	 * @param month
+	 * @param year
+	 */
 	public static void printCalender(int month, int year) {
 		String[] months = { "", // leave empty so that months[1] = "January"
 				"January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
@@ -1365,6 +1443,7 @@ public class Utility {
 	 *
 	 * @param testCase
 	 */
+
 	public void numberOfBST(int testCase) {
 		System.out.println("Enter total " + testCase + " number of nodes");
 		int[] array = new int[testCase];
@@ -1379,6 +1458,10 @@ public class Utility {
 
 	}
 
+	/**
+	 * @param number
+	 * @return
+	 */
 	public static int treeCount(int number) {
 		int intsum = 0;
 		if (number == 0 || number == 1) {
@@ -1392,5 +1475,37 @@ public class Utility {
 			return intsum;
 		}
 	}
-
+   /**
+ * 
+ */
+public static void primeAnagramStack() {
+	   Stack<Integer> stack=new Stack<>();
+	   int[] anagram=primeAnagram();
+	   for (int i = 0; i < anagram.length; i++) {
+		   if(anagram[i]==0) {
+			   continue;
+		   }
+		stack.push(anagram[i]);
+	}
+	   stack.traverse();
+	   /*for(int i=stack.size()-1;i>=0;i--) {
+		   stack.pop();
+		   
+	   }*/
+   }
+   
+   /**
+ * 
+ */
+public static void angramPrimeQ() {
+	   Queue<Integer> queue=new Queue<>();
+	   int[] anagram=primeAnagram();
+	   for(int i=0;i<anagram.length;i++) {
+		   if(anagram[i]==0) {
+			   continue;
+		   }
+		   queue.enqueue(anagram[i]);
+	   }
+	   queue.display();
+   }
 }
