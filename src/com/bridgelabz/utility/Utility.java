@@ -28,7 +28,7 @@ import com.bridgelabz.datastructures.Stack;
 import com.bridgelabz.datastructures.StackReverse;
 
 public class Utility {
-	private static final Exception NumberFormatException = null;
+
 	public Scanner scanner = new Scanner(System.in);
 	LinkedList<String> linkedList = new LinkedList<String>();
 	Stack<Character> stack = new Stack<Character>();
@@ -446,12 +446,13 @@ public class Utility {
 	 * Remove the space in given String
 	 * 
 	 * @param inputString
-	 * @return
+	 *            to remove the spaces in input string
+	 * @return returns the string without spaces
 	 */
 	public static String removeSpace(String inputString) {
-		String input=inputString;
+		String input = inputString;
 		char[] charString = input.toCharArray();
-		inputString = "";
+		input = "";
 		for (int i = 0; i < charString.length; i++) {
 			if (charString[i] != ' ') {
 				input = input + charString[i];

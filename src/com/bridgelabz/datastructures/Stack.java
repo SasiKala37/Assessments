@@ -3,6 +3,7 @@ package com.bridgelabz.datastructures;
 public class Stack<T extends Comparable<T>> {
 	Node<T> top;
 	int size = 0;
+
 	public static class Node<T extends Comparable<T>> {
 		private Node<T> next;
 		private T data;
@@ -18,8 +19,12 @@ public class Stack<T extends Comparable<T>> {
 		}
 	}
 
-	
-	
+	/**
+	 * push the data into the stack
+	 * 
+	 * @param data
+	 *            the data is push to stack
+	 */
 	public void push(T data) {
 		Node<T> node = new Node<T>(data, null);
 		if (top == null) {
@@ -31,6 +36,9 @@ public class Stack<T extends Comparable<T>> {
 		size++;
 	}
 
+	/**
+	 * Display the stack data
+	 */
 	public void traverse() {
 		Node<T> temp = top;
 		if (temp == null) {
@@ -43,14 +51,29 @@ public class Stack<T extends Comparable<T>> {
 		}
 	}
 
+	/**
+	 * find the size of the stack
+	 * 
+	 * @return returns the number of elements present in stack
+	 */
 	public int size() {
 		return size;
 	}
 
+	/**
+	 * check whether the stack is empty or not
+	 * 
+	 * @return it returns the true or false whether the stack is empty or not
+	 */
 	public boolean isEmpty() {
 		return top == null;
 	}
 
+	/**
+	 * pop the data in stack at top position
+	 * 
+	 * @return it returns the pop element from the stack
+	 */
 	public T pop() {
 		if (isEmpty()) {
 			System.out.println("EMpty stack");
@@ -62,6 +85,11 @@ public class Stack<T extends Comparable<T>> {
 		return temp.data;
 	}
 
+	/**
+	 * find which element at the top position
+	 * 
+	 * @return it return top element
+	 */
 	public T peek() {
 		if (isEmpty()) {
 			return null;
@@ -69,13 +97,16 @@ public class Stack<T extends Comparable<T>> {
 		return top.data;
 	}
 
+	/**
+	 * Display the stack data in one line
+	 */
 	public void displayInLine() {
-		
+
 		Node<T> temp = top;
 		if (temp == null) {
 			System.out.println("Empty stack");
 		}
-		//System.out.println("Pushed Elements: ");
+		// System.out.println("Pushed Elements: ");
 		while (temp != null) {
 			System.out.print(temp.data);
 			temp = temp.next;
