@@ -1,6 +1,8 @@
 package com.bridgelabz.datastructures;
 
 public class Stack<T extends Comparable<T>> {
+	Node<T> top;
+	int size = 0;
 	public static class Node<T extends Comparable<T>> {
 		private Node<T> next;
 		private T data;
@@ -16,9 +18,8 @@ public class Stack<T extends Comparable<T>> {
 		}
 	}
 
-	int size = 0;
-	Node<T> top;
-
+	
+	
 	public void push(T data) {
 		Node<T> node = new Node<T>(data, null);
 		if (top == null) {

@@ -449,14 +449,15 @@ public class Utility {
 	 * @return
 	 */
 	public static String removeSpace(String inputString) {
-		char[] charString = inputString.toCharArray();
+		String input=inputString;
+		char[] charString = input.toCharArray();
 		inputString = "";
 		for (int i = 0; i < charString.length; i++) {
 			if (charString[i] != ' ') {
-				inputString = inputString + charString[i];
+				input = input + charString[i];
 			}
 		}
-		return inputString;
+		return input;
 	}
 
 	/****************************************
@@ -955,7 +956,8 @@ public class Utility {
 	 * 
 	 * @param searchString
 	 *            search the string in file content
-	 * @throws IOException it handle the file not found exception
+	 * @throws IOException
+	 *             it handle the file not found exception
 	 */
 	public void searchWord(String searchString) throws IOException {
 		String filePath = "/home/bridgelabz/sasi-txtdocuments/names.txt";
@@ -1008,14 +1010,19 @@ public class Utility {
 	}
 
 	/**
+	 * calculate the cash balance in account
+	 * 
 	 * @param numberOfPersons
+	 *            number of persons present in the queue
 	 * @param balance
+	 *            pass the user account available balance
 	 */
 	public void maintainCashBalance(int numberOfPersons, double balance) {
-		int[] person = new int[numberOfPersons];
+		int n = numberOfPersons;
+		double result = balance;
+		int[] person = new int[n];
 		double withdraw;
 		double deposit;
-		;
 		for (int i = 1; i <= person.length; i++) {
 			queue.enqueue(i);
 		}
@@ -1029,9 +1036,9 @@ public class Utility {
 			case 1:
 				System.out.println("Enter the amount to withdraw");
 				withdraw = userInputDouble();
-				if (balance >= withdraw) {
-					balance = balance - withdraw;
-					System.out.println("cacsh balance:" + balance);
+				if (result >= withdraw) {
+					result = result - withdraw;
+					System.out.println("cacsh balance:" + result);
 				} else {
 					System.out.println("Insufficient balance");
 				}
@@ -1040,7 +1047,7 @@ public class Utility {
 			case 2:
 				System.out.println("Enter the amount to deposit");
 				deposit = userInputDouble();
-				balance = balance + deposit;
+				result = result + deposit;
 				System.out.println("cacsh balance:" + balance);
 				queue.dequeue();
 				break;
