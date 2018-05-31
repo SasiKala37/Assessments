@@ -1,6 +1,6 @@
 /*********************************************************************************
  * 
- * Purpose: Replace the string template "Hello <<UserName>>, How are you?"
+ * Purpose: Utility methods for all the programs
  * 
  * @author SasiKala
  * @version 1.0
@@ -21,7 +21,6 @@ import java.util.Scanner;
 
 import com.bridgelabz.datastructures.Deque;
 import com.bridgelabz.datastructures.LinkedList;
-import com.bridgelabz.datastructures.Map;
 import com.bridgelabz.datastructures.Queue;
 import com.bridgelabz.datastructures.SortedLinkedList;
 import com.bridgelabz.datastructures.Stack;
@@ -30,11 +29,11 @@ import com.bridgelabz.datastructures.StackReverse;
 public class Utility {
 
 	public Scanner scanner = new Scanner(System.in);
-	LinkedList<String> linkedList = new LinkedList<String>();
-	Stack<Character> stack = new Stack<Character>();
-	Queue<Integer> queue = new Queue<Integer>();
-	Deque<Character> deque = new Deque<Character>();
-	SortedLinkedList<Integer> sortedLinkedList = new SortedLinkedList<Integer>();
+	LinkedList<String> linkedList = new LinkedList<>();
+	Stack<Character> stack = new Stack<>();
+	Queue<Integer> queue = new Queue<>();
+	Deque<Character> deque = new Deque<>();
+	SortedLinkedList<Integer> sortedLinkedList = new SortedLinkedList<>();
 
 	public String userInputString() {
 		return scanner.next();
@@ -57,7 +56,6 @@ public class Utility {
 	 * 
 	 * @param userName
 	 * @return
-	 * @throws IOException
 	 */
 	public String stringReplace(String userName) {
 
@@ -69,6 +67,7 @@ public class Utility {
 	 * Calculate the head and tail percentage when flapping the coin randomly
 	 * 
 	 * @param noOfFlips
+	 *            toss the coin number of times
 	 */
 	public static void flipCoin(int noOfFlips) {
 		int heads = 0;
@@ -96,8 +95,8 @@ public class Utility {
 	 * checking given year is leap year or not
 	 * 
 	 * @param year
-	 * @return
-	 * @throws IOException
+	 *            4 digit number
+	 * @return leap year or notF
 	 */
 	public static String leapYearChecker(String year) {
 
@@ -122,6 +121,7 @@ public class Utility {
 	 * printing power of two table
 	 * 
 	 * @param N
+	 *            print 2 power table up to the limitF
 	 */
 	public static void powerOfTwo(int N) {
 		double result = 0;
@@ -135,7 +135,8 @@ public class Utility {
 	 * calculate the nth term number in the harmonic series
 	 * 
 	 * @param nthTermNumber
-	 * @return
+	 *            to calculate the harmonic value
+	 * @return nth harmonic value
 	 */
 	public static double nthHarmonicValue(int nthTermNumber) {
 		double result = 0;
@@ -149,6 +150,7 @@ public class Utility {
 	 * calculate the prime factors of given number
 	 * 
 	 * @param N
+	 *            calculate the prime factors of N
 	 */
 	public void primeFactors(int N) {
 		for (int i = 2; i * i <= N; i++) {
@@ -167,8 +169,10 @@ public class Utility {
 	 * find the distance from (x,y) to (0,0)
 	 * 
 	 * @param x
+	 *            co-ordinate value
 	 * @param y
-	 * @return
+	 *            co-ordinate value
+	 * @return distance from (x,y) to (0,0)
 	 */
 	public static double findDistance(int x, int y) {
 		return Math.sqrt((x * x) + (y * y));
@@ -179,8 +183,11 @@ public class Utility {
 	 * a*x*x+b*x+c
 	 * 
 	 * @param a
+	 *            coefficient of x^2
 	 * @param b
+	 *            coefficient of x
 	 * @param c
+	 *            constant
 	 */
 	public static void findingRoots(int a, int b, int c) {
 		double delta = (b * b) - (4 * a * c);
@@ -203,18 +210,21 @@ public class Utility {
 	 * Compute the windChill using given formula
 	 * 
 	 * @param temprature
-	 * @param windpeed
-	 * @return
+	 *            below 50
+	 * @param windspeed
+	 *            3< winwindspeed >120
+	 * @return wind chill
 	 */
 	public static double computeWindChill(double temperature, double windSpeed) {
 		return 35.74 + 0.6215 * temperature + (0.4275 * temperature - 35.75) * Math.pow(windSpeed, 0.16);
 	}
 
 	/**
-	 * get the random number from given number to number-1
+	 * get the random number from given number n to n-1
 	 * 
 	 * @param number
-	 * @return
+	 *            to get random value
+	 * @return random number
 	 */
 	public static int getCoupon(int number) {
 		Random random = new Random();
@@ -225,6 +235,7 @@ public class Utility {
 	 * find the distinct coupon numbers
 	 * 
 	 * @param randomNumber
+	 *            check the distinctNumber less than randomNumber
 	 */
 	public static int distinctCouponNumber(int randomNumber) {
 		int count = 0;
@@ -245,8 +256,11 @@ public class Utility {
 	 * calculate the percentage of win and loss gambler
 	 * 
 	 * @param stake
+	 *            sum amount
 	 * @param goal
+	 *            reach the stake
 	 * @param numberOfTrails
+	 *            number of times to play the game
 	 */
 	public static void gamblGoal(int stake, int goal, int numberOfTrails) {
 
@@ -273,11 +287,14 @@ public class Utility {
 	}
 
 	/**
-	 * calculate the permutation of string using iterative meathod
+	 * calculate the permutation of string using iterative method
 	 * 
 	 * @param input
+	 *            to find the number of permutations of string
 	 * @param startIndex
+	 *            first index of the input
 	 * @param endIndex
+	 *            last index of the inputs
 	 */
 	public static void permutation(String input, int startIndex, int endIndex) {
 		if (startIndex == endIndex) {
@@ -295,9 +312,12 @@ public class Utility {
 	 * Swap the string based on index
 	 * 
 	 * @param input
+	 *            string to swap the indexes
 	 * @param startIndex
+	 *            first index of the input
 	 * @param position
-	 * @return
+	 *            to swap the index with that positionF
+	 * @return string after swap
 	 */
 	public static String swapInputString(String input, int startIndex, int position) {
 		char[] charArray = input.toCharArray();
@@ -312,7 +332,7 @@ public class Utility {
 	/**
 	 * compute the elapsed time using stop watch
 	 * 
-	 * @return
+	 * @return elapsed time between start and end time
 	 */
 	public long findElapseTime() {
 		System.out.println(" the start time, type start");
@@ -327,6 +347,7 @@ public class Utility {
 	 * calculating triplet sum using array values
 	 * 
 	 * @param tripletSum
+	 *            3 integers sum
 	 */
 	public void sumOfTriplets(int tripletSum) {
 		int count = 0;
@@ -353,7 +374,9 @@ public class Utility {
 	 * Read the 2D integer array from the user and print the array of elements
 	 * 
 	 * @param rowSize
+	 *            number of rows
 	 * @param columnSize
+	 *            number of columns
 	 */
 	public void readArrayOfIntegers(int rowSize, int columnSize) {
 		int array[][] = new int[rowSize][columnSize];
@@ -376,7 +399,9 @@ public class Utility {
 	 * Read the 2D double array from the user and print the array of elements
 	 * 
 	 * @param rowSize
+	 *            number of rows
 	 * @param columnSize
+	 *            number of columns
 	 */
 	public void readArrayOfDouble(int rowSize, int columnSize) {
 		double array[][] = new double[rowSize][columnSize];
@@ -399,7 +424,9 @@ public class Utility {
 	 * Read the 2D boolean array from the user and print the array of elements
 	 * 
 	 * @param rowSize
+	 *            number of rows
 	 * @param columnSize
+	 *            number of columns
 	 */
 	public void readArrayOfBoolean(int rowSize, int columnSize) {
 		boolean array[][] = new boolean[rowSize][columnSize];
@@ -426,8 +453,10 @@ public class Utility {
 	 * check whether the given strings are anagram or not
 	 * 
 	 * @param firstString
+	 *            to compare with second string
 	 * @param secondString
-	 * @return
+	 *            to compare with first string
+	 * @return true/false if two strings are anagram or not
 	 */
 	public static <T extends Comparable<T>> boolean isAnagram(String firstString, String secondString) {
 		firstString = removeSpace(firstString);
@@ -461,12 +490,15 @@ public class Utility {
 		return input;
 	}
 
-	/****************************************
-	 * check whether the given strings are having same characters
+	/**
+	 * check whether the given strings are having same characters or not
 	 * 
 	 * @param firstString
+	 *            to compare with second string
+	 * 
 	 * @param secondString
-	 * @return
+	 *            to compare with first string
+	 * @return true/false if strings are equal or not
 	 */
 	public static boolean checkString(String firstString, String secondString) {
 		char[] charString1 = firstString.toCharArray();
@@ -486,7 +518,8 @@ public class Utility {
 	 * sort the characters in ascending order
 	 * 
 	 * @param charString
-	 * @return
+	 *            to sort the characters in an array
+	 * @return sorted chararrary
 	 */
 	public static char[] sortChar(char[] charString) {
 		for (int i = 0; i < charString.length; i++) {
@@ -505,6 +538,7 @@ public class Utility {
 	 * find the prime numbers in the between the given range 1-1000
 	 * 
 	 * @param higherLimit
+	 *            print primes up to higher limit
 	 */
 	public static void findPrimeNumbers(int higherLimit) {
 		int count; // int k=0;
@@ -527,6 +561,7 @@ public class Utility {
 	 * check the given primeArray elements whether palindrome or not
 	 * 
 	 * @param primeArray
+	 *            to check the palindrome or not
 	 */
 	public static void isPalindrome(int[] primeArray) {
 		int reverseNumber = 0;
@@ -545,8 +580,10 @@ public class Utility {
 	 * guessing the number to enter true or false answer
 	 * 
 	 * @param low
+	 *            lower limit start with 0
 	 * @param high
-	 * @return
+	 *            pass high as 2^n-1
+	 * @return guessing value
 	 */
 	public int searchGuessNumber(int low, int high) {
 		if (high - low == 1) {
@@ -566,6 +603,7 @@ public class Utility {
 	 * generate the notes in descending order
 	 * 
 	 * @param amount
+	 *            to generate notes equal to the amount
 	 */
 	public static void generateChange(int amount) {
 		int[] ar = { 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000 };
@@ -607,7 +645,8 @@ public class Utility {
 	 * convert celsius to fahrenheit temperature
 	 * 
 	 * @param temperatureInCelsius
-	 * @return
+	 *            celcius temperature to convert fahrenheit
+	 * @return fahrenheit temperature
 	 */
 	public static double celsiusToFahrenheit(double temperatureInCelsius) {
 		return (temperatureInCelsius * 9 / 5) + 32;
@@ -617,7 +656,8 @@ public class Utility {
 	 * convert fahrenheit to celsius temperature
 	 * 
 	 * @param temperatureInFahrenheit
-	 * @return
+	 *            fahrenheit temperature to convert celcius
+	 * @return the celsius temprature
 	 */
 	public static double fahrenheitToCelsius(double temperatureInFahrenheit) {
 		return (temperatureInFahrenheit - 32) * 5 / 9;
@@ -628,8 +668,11 @@ public class Utility {
 	 * payment=(p*r)/(1-(1+r)^(-n))
 	 * 
 	 * @param principleAmount
+	 *            total amount
 	 * @param rateOfIntrest
+	 *            pass the interest
 	 * @param year
+	 *            pass number of year
 	 * @return
 	 */
 	public static double paymentCalculation(double principleAmount, double rateOfIntrest, double year) {
@@ -644,6 +687,7 @@ public class Utility {
 	 * calculate the square root of non negative number
 	 * 
 	 * @param c
+	 *            non negative number to find square root
 	 */
 	public static void sqrt(double c) {
 		double epsilon = 1e-15;
@@ -660,8 +704,11 @@ public class Utility {
 	 * week
 	 * 
 	 * @param day
+	 *            pass day between 1 to 31
 	 * @param month
+	 *            month between 1 to 12
 	 * @param year
+	 *            pass the 4 digit number
 	 */
 	public static int dayOfWeek(int day, int month, int year) {
 
@@ -697,7 +744,8 @@ public class Utility {
 	 * convert the decimal to binary
 	 * 
 	 * @param number
-	 * @return
+	 *            pass decimal number to convert binary
+	 * @return binary number
 	 */
 	public static StringBuilder toBinary(int number) {
 		String paddingZero = "";
@@ -733,8 +781,9 @@ public class Utility {
 	/**
 	 * swap the two nibbles
 	 * 
-	 * @param number
-	 * @return
+	 * @param decimalnumber
+	 *            pass decimal number to swap the nibbles
+	 * @return decimal value after swap the nibbles
 	 */
 	public static int binary(int decimalnumber) {
 		if (decimalnumber < 127) {
@@ -766,7 +815,8 @@ public class Utility {
 	 * Method to convert binary to decimal
 	 * 
 	 * @param string
-	 * @return
+	 *            it is a binary format number to convert decimal
+	 * @return decimal value of binary
 	 */
 	public static int binaryToDecimal(String string) {
 		int number = Integer.parseInt(string);
@@ -987,7 +1037,10 @@ public class Utility {
 	}
 
 	/**
+	 * check whether the given expression is balanced parenthesis or not
+	 * 
 	 * @param expression
+	 *            it is regular expression pass as parameter
 	 */
 	public void checkBalancedParenthesis(String expression) {
 		char[] expOperand = expression.toCharArray();
@@ -1060,8 +1113,11 @@ public class Utility {
 	}
 
 	/**
+	 * check whether the given input is palindrome or not
+	 * 
 	 * @param input
-	 * @return
+	 *            this parameter passed to check palindrome or not
+	 * @return true/false if it is palindrome or not
 	 */
 	public boolean checkPalindrome(String input) {
 
@@ -1085,8 +1141,12 @@ public class Utility {
 	}
 
 	/**
+	 * Search the data if it is present then remove otherwise add it into the file
+	 * 
 	 * @param searchData
+	 *            it is pass to search whether it is present or not
 	 * @throws FileNotFoundException
+	 *             it throw this exception when file is not found
 	 */
 	public void unorderedFile(String searchData) throws FileNotFoundException {
 		File file = new File("/home/bridgelabz/sasi-txtdocuments/names.txt");
@@ -1124,8 +1184,12 @@ public class Utility {
 	}
 
 	/**
+	 * Search the data if it is present then remove otherwise add it into the file
+	 * 
 	 * @param searchNumber
+	 *            it is pass to search whether it is present or not
 	 * @throws FileNotFoundException
+	 *             it throw this exception when file is not found
 	 */
 	public void orderedFile(int searchNumber) throws FileNotFoundException {
 		File file = new File("/home/bridgelabz/sasi-txtdocuments/numbers.txt");
@@ -1167,14 +1231,18 @@ public class Utility {
 	}
 
 	/**
+	 * Print the `prime numbers between low and high
+	 * 
 	 * @param low
+	 *            lower limit
 	 * @param high
-	 * @return
+	 *            higher limit
+	 * @return it returns prime array or null
 	 */
 	public static int[] findPrime(int low, int high) {
 		int flag;
-		int count = 0;
 		int k = 0;
+		int count = 0;
 		int[] prime = new int[200];
 		if (high < 2) {
 			return null;
@@ -1191,8 +1259,8 @@ public class Utility {
 				}
 			}
 			if (flag == 0) {
-				count++;
 				prime[k++] = i;
+				count++;
 			}
 		}
 		// System.out.println(count+" primes");
@@ -1200,7 +1268,9 @@ public class Utility {
 	}
 
 	/**
-	 * @return
+	 * prints the 2D prime array
+	 * 
+	 * @return it return the 2D array
 	 */
 	public static int[][] twoDPrime() {
 		int[][] prime = new int[10][30];
@@ -1228,16 +1298,16 @@ public class Utility {
 	}
 
 	/**
-	 * @return
+	 * check the prime number is anagram or not
+	 * 
+	 * @return it returns the prime anagram array
 	 */
 	public static int[] primeAnagram() {
 		int k = 0;
 		int low = 0;
 		int high = 0;
-		// int n=0;
 		int[] anagram = new int[200];
-		// int[][] nonanagram = new int[10][];
-		// int[][] anagramArray=new int[10][];
+
 		for (int l = 0; l < 10; l++) {
 			low = high;
 			high = low + 100;
@@ -1269,53 +1339,36 @@ public class Utility {
 
 	}
 
-	public static int[] checkNonAnagram() {
-		int[] prime = findPrime(0, 1000);
-		int k = 0;
-		int[] anagram = new int[300];
-		for (int i = 0; i < prime.length - 1; i++) {
-			for (int j = i + 1; j < prime.length; j++) {
-				if (isAnagram(Integer.toString(prime[i]), Integer.toString(prime[j]))) {
-					anagram[k++] = prime[i];
-					anagram[k++] = prime[j];
-				}
-				if (prime[j] == 0) {
-					break;
-				}
-			}
-		}
-		for (int i = 0; i < anagram.length; i++) {
-			System.out.println(anagram[i]);
-		}
-		return anagram;
-	}
-
-	public static void nonAngram() {
-		int low = 0;
-		int high = 100;
-
-		while (high < 1000) {
-
-			int[] prime = findPrime(low, high);
-			int[] anagram = checkNonAnagram();
-			int j = 0;
-			for (int i = 0; i < prime.length; i++) {
-				if (prime[i] == anagram[j++]) {
-					// System.out.print(prime[i]+" ");
-				}
-
-			}
-			System.out.println();
-			low = low + 100;
-			high = low + 100;
-		}
-	}
+	/*
+	 * public static int[] checkNonAnagram() { int[] prime = findPrime(0, 1000); int
+	 * k = 0; int[] anagram = new int[300]; for (int i = 0; i < prime.length - 1;
+	 * i++) { for (int j = i + 1; j < prime.length; j++) { if
+	 * (isAnagram(Integer.toString(prime[i]), Integer.toString(prime[j]))) {
+	 * anagram[k++] = prime[i]; anagram[k++] = prime[j]; } if (prime[j] == 0) {
+	 * break; } } } for (int i = 0; i < anagram.length; i++) {
+	 * System.out.println(anagram[i]); } return anagram; }
+	 * 
+	 * public static void nonAngram() { int low = 0; int high = 100;
+	 * 
+	 * while (high < 1000) {
+	 * 
+	 * int[] prime = findPrime(low, high); int[] anagram = checkNonAnagram(); int j
+	 * = 0; for (int i = 0; i < prime.length; i++) { if (prime[i] == anagram[j++]) {
+	 * // System.out.print(prime[i]+" "); }
+	 * 
+	 * } System.out.println(); low = low + 100; high = low + 100; } }
+	 */
 
 	/**
+	 * calculate the day of week
+	 * 
 	 * @param month
+	 *            month between 1 to 12
 	 * @param day
+	 *            days 1-31
 	 * @param year
-	 * @return
+	 *            any year to pass
+	 * @return it return day number that is falls which day of week
 	 */
 	public static int day(int month, int day, int year) {
 		int y = year - (14 - month) / 12;
@@ -1325,7 +1378,17 @@ public class Utility {
 		return d;
 	}
 
-	// to check month
+	/**
+	 * find the month have how many day
+	 * 
+	 * @param d
+	 *            day 1 to 31
+	 * @param mmonth
+	 *            1 to 12
+	 * @param y
+	 *            check year is leap year or not
+	 * @return return true/false given month has how many days or not
+	 */
 	public static boolean checkMonth(int d, int m, int y) {
 
 		boolean st = true;
@@ -1340,8 +1403,13 @@ public class Utility {
 		return st;
 	}
 
-	/*
-	 * Method to print calender using queue
+	/**
+	 * print the calender format using Queue
+	 * 
+	 * @param month
+	 *            month 1 to 12
+	 * @param year
+	 *            any year
 	 */
 	public static void calenderQueue(int month, int year) {
 		Queue<String> QueueWeek = new Queue<String>();
@@ -1391,10 +1459,18 @@ public class Utility {
 		QueueDays.displayCalender();
 	}
 
+	/**
+	 * print the calender format using stack
+	 * 
+	 * @param month
+	 *            month between 1 to 12
+	 * @param year
+	 *            any year
+	 */
 	public static void calenderStack(int month, int year) {
 
-		Stack<String> StackWeek = new Stack<String>();
-		Stack<String> StackDays = new Stack<String>();
+		Stack<String> stackWeek = new Stack<>();
+		Stack<String> stackDays = new Stack<String>();
 		StackReverse<String> StackReverse = new StackReverse<String>();
 		String[][] a = new String[6][7];
 		int d = 1;
@@ -1403,7 +1479,7 @@ public class Utility {
 		String[] days = { " S ", " M ", " T ", " W ", " Th ", "F", " Sa" };
 
 		for (int i = days.length - 1; i >= 0; i--) {
-			StackWeek.push(days[i]);
+			stackWeek.push(days[i]);
 		}
 		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < 7; j++) {
@@ -1413,7 +1489,7 @@ public class Utility {
 		int startDay = dayOfWeek(d, month, year);
 		// String dayStr=" "+startDay;
 		for (int i = 0; i < startDay; i++) {
-			StackDays.push("  ");
+			stackDays.push("  ");
 		}
 
 		for (int i = 0; i < 6; i++) {
@@ -1422,21 +1498,21 @@ public class Utility {
 					j = dayOfWeek(d, month, year);
 					if (d < 10) {
 						a[i][j] = " " + d++;
-						StackDays.push(a[i][j]);
+						stackDays.push(a[i][j]);
 					} else {
 						a[i][j] = "" + d++;
-						StackDays.push(a[i][j]);
+						stackDays.push(a[i][j]);
 					}
 
 				}
 
 			}
 		}
-		System.out.println(StackDays.size());
-		int index = StackDays.size();
+		System.out.println(stackDays.size());
+		int index = stackDays.size();
 
 		for (int i = 0; i < index; i++) {
-			StackReverse.push(StackDays.pop());
+			StackReverse.push(stackDays.pop());
 
 		}
 
@@ -1444,15 +1520,18 @@ public class Utility {
 		System.out.println(months[month] + " " + year);
 		System.out.println();
 
-		StackWeek.displayInLine();
+		stackWeek.displayInLine();
 
 		StackReverse.displayCalender();
 
 	}
 
 	/**
+	 * check the given year is leap year or not
+	 * 
 	 * @param year
-	 * @return
+	 *            year to pass check leap year or not
+	 * @return true/false if it is leap year or not
 	 */
 	public static boolean isLeapYear(int year) {
 		if ((year % 4 == 0) && (year % 100 != 0))
@@ -1463,8 +1542,12 @@ public class Utility {
 	}
 
 	/**
+	 * print the calender using 2D array format
+	 * 
 	 * @param month
+	 *            pass an integer 1 to 12
 	 * @param year
+	 *            pass the 4 digit year
 	 */
 	public static void printCalender(int month, int year) {
 		String[] months = { "", // leave empty so that months[1] = "January"
@@ -1499,6 +1582,7 @@ public class Utility {
 	 * Method to find possible number of binary search trees
 	 *
 	 * @param testCase
+	 *            pass the nodes number
 	 */
 
 	public void numberOfBST(int testCase) {
@@ -1516,8 +1600,11 @@ public class Utility {
 	}
 
 	/**
+	 * calculating the formula
+	 * 
 	 * @param number
-	 * @return
+	 *            number of nodes
+	 * @return total number of possible binary search trees
 	 */
 	public static int treeCount(int number) {
 		int intsum = 0;
@@ -1534,8 +1621,8 @@ public class Utility {
 	}
 
 	/**
-	* 
-	*/
+	 * Store the prime anagram numbers in stack and print it
+	 */
 	public static void primeAnagramStack() {
 		Stack<Integer> stack = new Stack<>();
 		int[] anagram = primeAnagram();
@@ -1546,16 +1633,11 @@ public class Utility {
 			stack.push(anagram[i]);
 		}
 		stack.traverse();
-		/*
-		 * for(int i=stack.size()-1;i>=0;i--) { stack.pop();
-		 * 
-		 * }
-		 */
 	}
 
 	/**
-	* 
-	*/
+	 * Store the prime anagram numbers in Queue and print it
+	 */
 	public static void angramPrimeQ() {
 		Queue<Integer> queue = new Queue<>();
 		int[] anagram = primeAnagram();
