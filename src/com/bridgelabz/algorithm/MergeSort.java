@@ -10,7 +10,9 @@ public class MergeSort {
 		int size=utility.userInputInteger();
 		String[] arrayOfString = new String[size];
 		System.out.println("Enter String elements");
-		Utility.readData(arrayOfString,size);
+		for (int i = 0; i < arrayOfString.length; i++) {
+			arrayOfString[i]=utility.userInputString();
+		}
 		Utility.sort(arrayOfString,0,arrayOfString.length-1);
 	}
 }

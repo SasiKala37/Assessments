@@ -1,5 +1,7 @@
 package com.bridgelabz.datastructures;
 
+import com.bridgelabz.utility.Utility;
+
 public class Queue<T extends Comparable<T>> {
 	public static class Node<T extends Comparable<T>> {
 		private Node<T> next;
@@ -54,14 +56,45 @@ public class Queue<T extends Comparable<T>> {
 			System.out.println("Empty");
 		}
 		Node<T> temp = front;
-		System.out.println("Queue elements");
+		//System.out.println("Queue elements");
 		while (temp != rear.next) {
-			System.out.println(temp.data);
+			System.out.print(temp.data);
 			temp = temp.next;
 		}
 	}
 	public int size() {
 		return count;
+	}
+
+	public void displayInLine() {
+		if (count == 0) {
+			System.out.println("Empty");
+		}
+		Node<T> temp = front;
+		while (temp != rear.next) {
+			System.out.print(temp.data);
+			temp = temp.next;
+		}
+		System.out.println();
+		
+	}
+
+	public void displayCalender() {
+		if (count == 0) {
+			System.out.println("Empty");
+		}
+		Node<T> temp = front;
+		for(int i=0;i<6;i++) {
+			for(int j=0;j<7;j++) {
+				if(temp != rear.next) {
+					System.out.print(temp.data+" ");
+					temp = temp.next;
+				}
+			}
+			System.out.println();
+		}
+		
+		
 	}
 
 }

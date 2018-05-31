@@ -1,6 +1,8 @@
 package com.bridgelabz.datastructures;
 
-public class Stack<T extends Comparable<T>> {
+import com.bridgelabz.datastructures.Stack.Node;
+
+public class StackReverse<T extends Comparable<T>> {
 	public static class Node<T extends Comparable<T>> {
 		private Node<T> next;
 		private T data;
@@ -50,15 +52,14 @@ public class Stack<T extends Comparable<T>> {
 		return top == null;
 	}
 
-	public T pop() {
+	public void pop() {
 		if (isEmpty()) {
 			System.out.println("EMpty stack");
 		}
 		Node<T> temp = top;
-		System.out.print(temp.data);
+		System.out.println(temp.data);
 		top = temp.next;
 		size--;
-		return temp.data;
 	}
 
 	public T peek() {
@@ -68,17 +69,20 @@ public class Stack<T extends Comparable<T>> {
 		return top.data;
 	}
 
-	public void displayInLine() {
-		
+	public void displayCalender() {
 		Node<T> temp = top;
 		if (temp == null) {
 			System.out.println("Empty stack");
 		}
-		//System.out.println("Pushed Elements: ");
-		while (temp != null) {
-			System.out.print(temp.data);
-			temp = temp.next;
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 7; j++) {
+				if (temp != null) {
+						System.out.print(temp.data+" ");
+						temp = temp.next;
+					}
+			}
+			System.out.println();
 		}
-		System.out.println();
+		
 	}
 }

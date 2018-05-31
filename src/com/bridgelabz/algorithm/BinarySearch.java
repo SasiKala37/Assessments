@@ -11,7 +11,10 @@ public class BinarySearch {
 
 		System.out.println("Enter elements");
 		Integer[] arrayData = new Integer[size];
-		Utility.readData(arrayData, size);
+		for (int i = 0; i < arrayData.length; i++) {
+			arrayData[i]=utility.userInputInteger();
+		}
+		
 
 		System.out.println("Enter Searchelment");
 		Integer searchElement = utility.userInputInteger();

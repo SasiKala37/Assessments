@@ -21,7 +21,40 @@ public class GregorianCalender {
 		int month = Integer.parseInt(args[1]);
 
 		int year = Integer.parseInt(args[2]);
-		Utility.dayOfWeek(day, month, year);
+		boolean keepGoing=true;
+		int dayNumber=Utility.dayOfWeek(day, month, year);
+		String result = "";
+		while(keepGoing) {
+		switch (dayNumber) {
+		case 0:
+			result += "sunday";
+			break;
+		case 1:
+			result += "monday";
+			break;
+		case 2:
+			result += "tuesday";
+			break;
+		case 3:
+			result += "wednesday";
+			break;
+		case 4:
+			result += "thursday";
+			break;
+		case 5:
+			result += "friday";
+			break;
+		case 6:
+			result += "satday";
+			break;
+		default:
+			System.out.println("Nothing");
+			break;
+		}
+		System.out.println("The day of the week is " + result);
+		keepGoing = false;
+	}
+		
 	}
 
 }

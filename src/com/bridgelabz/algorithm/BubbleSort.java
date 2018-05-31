@@ -12,7 +12,10 @@ public class BubbleSort {
 		String[] arrayOfString = new String[size];
 
 		System.out.println("Enter String elements");
-		Utility.readData(arrayOfString, size);
+		//Integer[] arrayData = new Integer[size];
+		for (int i = 0; i < arrayOfString.length; i++) {
+			arrayOfString[i]=utility.userInputString();
+		}
 
 		Utility.bubbleSort(arrayOfString);
 

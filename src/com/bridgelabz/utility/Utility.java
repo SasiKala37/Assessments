@@ -25,6 +25,7 @@ import com.bridgelabz.datastructures.Map;
 import com.bridgelabz.datastructures.Queue;
 import com.bridgelabz.datastructures.SortedLinkedList;
 import com.bridgelabz.datastructures.Stack;
+import com.bridgelabz.datastructures.StackReverse;
 
 public class Utility {
 	private static final Exception NumberFormatException = null;
@@ -660,9 +661,10 @@ public class Utility {
 	 * @param month
 	 * @param year
 	 */
-	public static void dayOfWeek(int day, int month, int year) {
+	public static int dayOfWeek(int day, int month, int year) {
 
 		boolean keepGoing = true;
+		int d0 = 0;
 		while (keepGoing) {
 			if ((month <= 1 || month >= 12)) {
 				System.out.println("Months are between 1 and 12");
@@ -682,38 +684,11 @@ public class Utility {
 			int y0 = year - (14 - month) / 12;
 			int x = y0 + y0 / 4 - y0 / 100 + y0 / 400;
 			int m0 = month + 12 * ((14 - month) / 12) - 2;
-			int d0 = (day + x + 31 * m0 / 12) % 7;
-			String result = "";
-			switch (d0) {
-			case 0:
-				result += "sunday";
-				break;
-			case 1:
-				result += "monday";
-				break;
-			case 2:
-				result += "tuesday";
-				break;
-			case 3:
-				result += "wednesday";
-				break;
-			case 4:
-				result += "thursday";
-				break;
-			case 5:
-				result += "friday";
-				break;
-			case 6:
-				result += "satday";
-				break;
-			default:
-				System.out.println("Nothing");
-				break;
-			}
-			System.out.println("The day of the week is " + result);
+			d0 = (day + x + 31 * m0 / 12) % 7;
 			keepGoing = false;
-		}
 
+		}
+		return d0;
 	}
 
 	/**
@@ -809,7 +784,7 @@ public class Utility {
 	 * search the specific data using binary search
 	 * 
 	 * @param arrayData
-	 *             reading array of elements
+	 *            reading array of elements
 	 * @param searchElement
 	 *            the which element user want to search
 	 * @param low
@@ -837,7 +812,7 @@ public class Utility {
 	 * sort the data using bubble sort technique
 	 * 
 	 * @param data
-	 *             data array
+	 *            data array
 	 */
 	public static <T extends Comparable<T>> void bubbleSort(T[] data) {
 		for (int i = 0; i < data.length - 1; i++) {
@@ -866,20 +841,13 @@ public class Utility {
 		System.out.println();
 	}
 
-	public static <T extends Comparable<T>> void readData(T[] data, int size) {
-		for (int i = 0; i < size; i++) {
-			System.out.print(data[i] + " ");
-		}
-		System.out.println();
-	}
-
 	/**
 	 * Sort the data based on key value(insertion sort)
 	 * 
 	 * @param data
 	 *            array data to sort
 	 */
-	public static <T extends Comparable<T>> void insertionSort(T[] data) {
+	public static <T extends Comparable<T>> T[] insertionSort(T[] data) {
 		for (int i = 0; i < data.length; i++) {
 			T key = data[i];
 			int j = i - 1;
@@ -890,8 +858,9 @@ public class Utility {
 			}
 			data[j + 1] = key;
 		}
-		System.out.println("Sorted data");
-		printData(data);
+		// System.out.println("Sorted data");
+		// printData(data);
+		return data;
 
 	}
 
@@ -900,7 +869,7 @@ public class Utility {
 	 * single array
 	 * 
 	 * @param data
-	 *             array of data
+	 *            array of data
 	 * @param low
 	 *            array first index
 	 * @param mid
@@ -960,7 +929,7 @@ public class Utility {
 	 * Sort the data
 	 * 
 	 * @param data
-	 *             Array of data
+	 *            Array of data
 	 * @param low
 	 *            array first index
 	 * @param high
@@ -985,7 +954,8 @@ public class Utility {
 	 * to find the word in file using binary search technique
 	 * 
 	 * @param searchString
-	 * @throws IOException
+	 *            search the string in file content
+	 * @throws IOException it handle the file not found exception
 	 */
 	public void searchWord(String searchString) throws IOException {
 		String filePath = "/home/bridgelabz/sasi-txtdocuments/names.txt";
@@ -1189,57 +1159,10 @@ public class Utility {
 	}
 
 	/**
-	 * @throws Exception
+	 * @param low
+	 * @param high
+	 * @return
 	 */
-	public void searchInHashMap() throws Exception {
-		File file = new File("/home/bridgelabz/sasi-txtdocuments/numbers.txt");
-		Map<Integer, Integer> map = new Map<>();
-		int[] number = new int[15];
-		try {
-			BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-			String line = "";
-			int k = 0;
-			int remainder = 0;
-			while ((line = bufferedReader.readLine()) != null) {
-				String[] words = line.split(",");
-				for (int i = 0; i < words.length; i++) {
-					number[++k] = Integer.parseInt(words[i], 10);
-					remainder = number[i] % words.length;
-					map.put(remainder, number[i]);
-					// throw NumberFormatException;
-
-				}
-			}
-
-			System.out.println("File content:");
-			for (int i = 0; i < number.length; i++) {
-				System.out.println(map.get(i));
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		System.out.println("Enter the search number");
-		int searchNumber = userInputInteger();
-		int search = map.get(searchNumber);
-		if (search == searchNumber) {
-			map.remove(searchNumber);
-
-		} else {
-			map.put(searchNumber % number.length, searchNumber);
-
-		}
-		// System.out.println("Edited file content");
-
-		PrintWriter printWriter = new PrintWriter(file);
-		for (int i = 0; i < map.size(); i++) {
-
-			printWriter.print(map.get(i) + ",");
-		}
-		printWriter.close();
-
-	}
-
 	public static int[] findPrime(int low, int high) {
 		int flag;
 		int count = 0;
@@ -1303,20 +1226,20 @@ public class Utility {
 		int k = 0;
 		int low = 0;
 		int high = 0;
-		//int n=0;
+		// int n=0;
 		int[] anagram = new int[200];
-		//int[][] nonanagram = new int[10][];
-		//int[][] anagramArray=new int[10][];
+		// int[][] nonanagram = new int[10][];
+		// int[][] anagramArray=new int[10][];
 		for (int l = 0; l < 10; l++) {
 			low = high;
 			high = low + 100;
 			int[] prime = findPrime(low, high);
-			for (int i = 0; i < prime.length-1; i++) {
-				if(prime[i]==0){
+			for (int i = 0; i < prime.length - 1; i++) {
+				if (prime[i] == 0) {
 					break;
 				}
 				for (int j = i + 1; j < prime.length; j++) {
-					
+
 					if (isAnagram(Integer.toString(prime[i]), Integer.toString(prime[j]))) {
 						anagram[k++] = prime[i];
 						anagram[k++] = prime[j];
@@ -1326,30 +1249,29 @@ public class Utility {
 						break;
 					}
 				}
-				
-			}
-		System.out.println();
-		}
-		/*for (int i = 0; i < nonanagram.length; i++) {
-			for (int j = 0; j <nonanagram .length; j++) {
-			System.out.print(nonanagram[i][j]);	
+
 			}
 			System.out.println();
-		}*/
+		}
+		/*
+		 * for (int i = 0; i < nonanagram.length; i++) { for (int j = 0; j <nonanagram
+		 * .length; j++) { System.out.print(nonanagram[i][j]); } System.out.println(); }
+		 */
 		return anagram;
-	
+
 	}
+
 	public static int[] checkNonAnagram() {
-		int[] prime=findPrime(0, 1000);
-		int k=0;
-		int[] anagram=new int[300];
-		for (int i = 0; i < prime.length-1; i++) {
-			for (int j = i+1; j < prime.length; j++) {
-				if(isAnagram(Integer.toString(prime[i]), Integer.toString(prime[j]))){
-					anagram[k++]=prime[i];
-					anagram[k++]=prime[j];
+		int[] prime = findPrime(0, 1000);
+		int k = 0;
+		int[] anagram = new int[300];
+		for (int i = 0; i < prime.length - 1; i++) {
+			for (int j = i + 1; j < prime.length; j++) {
+				if (isAnagram(Integer.toString(prime[i]), Integer.toString(prime[j]))) {
+					anagram[k++] = prime[i];
+					anagram[k++] = prime[j];
 				}
-				if(prime[j]==0) {
+				if (prime[j] == 0) {
 					break;
 				}
 			}
@@ -1359,26 +1281,28 @@ public class Utility {
 		}
 		return anagram;
 	}
+
 	public static void nonAngram() {
-		int low=0;int high=100;
-		
-		while(high<1000) {
-		
-		int[] prime=findPrime(low, high);
-		int[] anagram=checkNonAnagram();
-		int j=0;
-		for(int i=0;i<prime.length;i++) {
-			  if(prime[i]==anagram[j++]) {
-				 // System.out.print(prime[i]+" ");
-			  }
-			  
-		  }
-		System.out.println();
-		low=low+100;
-		  high=low+100;
+		int low = 0;
+		int high = 100;
+
+		while (high < 1000) {
+
+			int[] prime = findPrime(low, high);
+			int[] anagram = checkNonAnagram();
+			int j = 0;
+			for (int i = 0; i < prime.length; i++) {
+				if (prime[i] == anagram[j++]) {
+					// System.out.print(prime[i]+" ");
+				}
+
+			}
+			System.out.println();
+			low = low + 100;
+			high = low + 100;
 		}
 	}
-	
+
 	/**
 	 * @param month
 	 * @param day
@@ -1391,6 +1315,131 @@ public class Utility {
 		int m = month + 12 * ((14 - month) / 12) - 2;
 		int d = (day + x + (31 * m) / 12) % 7;
 		return d;
+	}
+
+	// to check month
+	public static boolean checkMonth(int d, int m, int y) {
+
+		boolean st = true;
+		if (((m == 4 || m == 6 || m == 9 || m == 11) && (d > 30)) || (d > 31)
+				|| (m == 2 && y % 100 == 0 && y % 400 != 0 && d > 28) || (m == 2 && y % 400 == 0 && d > 29)
+				|| (m == 2 && y % 100 != 0 && y % 4 != 0 && d > 28)
+				|| (m == 2 && y % 100 != 0 && y % 4 == 0 && d > 29)) {
+			st = false;
+		} else {
+			st = true;
+		}
+		return st;
+	}
+
+	/*
+	 * Method to print calender using queue
+	 */
+	public static void calenderQueue(int month, int year) {
+		Queue<String> QueueWeek = new Queue<String>();
+		Queue<String> QueueDays = new Queue<String>();
+		String[][] a = new String[6][7];
+		int d = 1;
+		String[] months = { " ", "January", "February", "March", "April", "May", "June", "July", "August", "September",
+				"October", "November", "December" };
+		String[] days = { " S ", " M ", " T ", " W ", " Th ", "F", " Sa" };
+
+		for (int i = 0; i < days.length; i++) {
+			QueueWeek.enqueue(days[i]);
+		}
+		System.out.println();
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 7; j++) {
+				a[i][j] = "  ";
+			}
+		}
+		int startday = dayOfWeek(d, month, year);
+		for (int i = 0; i < startday; i++) {
+			QueueDays.enqueue("  ");
+		}
+
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 7; j++) {
+				if (checkMonth(d, month, year)) {
+					j = dayOfWeek(d, month, year);
+					if (d < 10) {
+						a[i][j] = " " + d++;
+						QueueDays.enqueue(a[i][j]);
+					} else {
+						a[i][j] = "" + d++;
+						QueueDays.enqueue(a[i][j]);
+					}
+
+				}
+
+			}
+		}
+
+		System.out.println(months[month] + " " + year);
+		System.out.println();
+
+		QueueWeek.displayInLine();
+		// System.out.println();
+		QueueDays.displayCalender();
+	}
+
+	public static void calenderStack(int month, int year) {
+
+		Stack<String> StackWeek = new Stack<String>();
+		Stack<String> StackDays = new Stack<String>();
+		StackReverse<String> StackReverse = new StackReverse<String>();
+		String[][] a = new String[6][7];
+		int d = 1;
+		String[] months = { " ", "January", "February", "March", "April", "May", "June", "July", "August", "September",
+				"October", "November", "December" };
+		String[] days = { " S ", " M ", " T ", " W ", " Th ", "F", " Sa" };
+
+		for (int i = days.length - 1; i >= 0; i--) {
+			StackWeek.push(days[i]);
+		}
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 7; j++) {
+				a[i][j] = "  ";
+			}
+		}
+		int startDay = dayOfWeek(d, month, year);
+		// String dayStr=" "+startDay;
+		for (int i = 0; i < startDay; i++) {
+			StackDays.push("  ");
+		}
+
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 7; j++) {
+				if (checkMonth(d, month, year)) {
+					j = dayOfWeek(d, month, year);
+					if (d < 10) {
+						a[i][j] = " " + d++;
+						StackDays.push(a[i][j]);
+					} else {
+						a[i][j] = "" + d++;
+						StackDays.push(a[i][j]);
+					}
+
+				}
+
+			}
+		}
+		System.out.println(StackDays.size());
+		int index = StackDays.size();
+
+		for (int i = 0; i < index; i++) {
+			StackReverse.push(StackDays.pop());
+
+		}
+
+		System.out.println(StackReverse.size());
+		System.out.println(months[month] + " " + year);
+		System.out.println();
+
+		StackWeek.displayInLine();
+
+		StackReverse.displayCalender();
+
 	}
 
 	/**
@@ -1475,37 +1524,39 @@ public class Utility {
 			return intsum;
 		}
 	}
-   /**
- * 
- */
-public static void primeAnagramStack() {
-	   Stack<Integer> stack=new Stack<>();
-	   int[] anagram=primeAnagram();
-	   for (int i = 0; i < anagram.length; i++) {
-		   if(anagram[i]==0) {
-			   continue;
-		   }
-		stack.push(anagram[i]);
+
+	/**
+	* 
+	*/
+	public static void primeAnagramStack() {
+		Stack<Integer> stack = new Stack<>();
+		int[] anagram = primeAnagram();
+		for (int i = 0; i < anagram.length; i++) {
+			if (anagram[i] == 0) {
+				continue;
+			}
+			stack.push(anagram[i]);
+		}
+		stack.traverse();
+		/*
+		 * for(int i=stack.size()-1;i>=0;i--) { stack.pop();
+		 * 
+		 * }
+		 */
 	}
-	   stack.traverse();
-	   /*for(int i=stack.size()-1;i>=0;i--) {
-		   stack.pop();
-		   
-	   }*/
-   }
-   
-   /**
- * 
- */
-public static void angramPrimeQ() {
-	   Queue<Integer> queue=new Queue<>();
-	   int[] anagram=primeAnagram();
-	   for(int i=0;i<anagram.length;i++) {
-		   if(anagram[i]==0) {
-			   continue;
-		   }
-		   queue.enqueue(anagram[i]);
-	   }
-	   queue.display();
-   }
+
+	/**
+	* 
+	*/
+	public static void angramPrimeQ() {
+		Queue<Integer> queue = new Queue<>();
+		int[] anagram = primeAnagram();
+		for (int i = 0; i < anagram.length; i++) {
+			if (anagram[i] == 0) {
+				continue;
+			}
+			queue.enqueue(anagram[i]);
+		}
+		queue.display();
+	}
 }
