@@ -167,8 +167,27 @@ public class LinkedList<T extends Comparable<T>> {
 		previousValue.next = currentValue.next;
 	}
 
-	public void removeAt() {
-
+	/**
+	 * @param index
+	 * @return
+	 */
+	public T removeAt(int index) {
+		if (index == 0) {
+			T temp = head.data;
+			head = (Node<T>) head.next;
+			count--;
+			return temp;
+		}
+		Node<T> t = head;
+		int count = 0;
+		while (count < index - 1) {
+			t = (Node<T>) t.next;
+			count++;
+		}
+		T temp = t.next.data;
+		t.next = t.next.next;
+		count--;
+		return temp;
 	}
 
 	/**

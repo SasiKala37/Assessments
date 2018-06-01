@@ -1,8 +1,9 @@
 package com.bridgelabz.datastructures;
 
-import com.bridgelabz.datastructures.Stack.Node;
-
 public class StackReverse<T extends Comparable<T>> {
+	Node<T> top;
+	int size = 0;
+
 	public static class Node<T extends Comparable<T>> {
 		private Node<T> next;
 		private T data;
@@ -18,9 +19,12 @@ public class StackReverse<T extends Comparable<T>> {
 		}
 	}
 
-	int size = 0;
-	Node<T> top;
-
+	/**
+	 * push the data into the stack
+	 * 
+	 * @param data
+	 *            the data is push to stack
+	 */
 	public void push(T data) {
 		Node<T> node = new Node<T>(data, null);
 		if (top == null) {
@@ -32,6 +36,9 @@ public class StackReverse<T extends Comparable<T>> {
 		size++;
 	}
 
+	/**
+	 * Display the stack data
+	 */
 	public void traverse() {
 		Node<T> temp = top;
 		if (temp == null) {
@@ -44,14 +51,29 @@ public class StackReverse<T extends Comparable<T>> {
 		}
 	}
 
+	/**
+	 * find the size of the stack
+	 * 
+	 * @return returns the number of elements present in stack
+	 */
 	public int size() {
 		return size;
 	}
 
+	/**
+	 * check whether the stack is empty or not
+	 * 
+	 * @return it returns the true or false whether the stack is empty or not
+	 */
 	public boolean isEmpty() {
 		return top == null;
 	}
 
+	/**
+	 * pop the data in stack at top position
+	 * 
+	 * @return it returns the pop element from the stack
+	 */
 	public void pop() {
 		if (isEmpty()) {
 			System.out.println("EMpty stack");
@@ -62,6 +84,11 @@ public class StackReverse<T extends Comparable<T>> {
 		size--;
 	}
 
+	/**
+	 * find which element at the top position
+	 * 
+	 * @return it return top element
+	 */
 	public T peek() {
 		if (isEmpty()) {
 			return null;
@@ -69,6 +96,9 @@ public class StackReverse<T extends Comparable<T>> {
 		return top.data;
 	}
 
+	/**
+	 * Display the calender format
+	 */
 	public void displayCalender() {
 		Node<T> temp = top;
 		if (temp == null) {
@@ -77,12 +107,12 @@ public class StackReverse<T extends Comparable<T>> {
 		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < 7; j++) {
 				if (temp != null) {
-						System.out.print(temp.data+" ");
-						temp = temp.next;
-					}
+					System.out.print(temp.data + " ");
+					temp = temp.next;
+				}
 			}
 			System.out.println();
 		}
-		
+
 	}
 }

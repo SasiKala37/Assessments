@@ -1,9 +1,11 @@
 package com.bridgelabz.datastructures;
 
 public class SortedLinkedList<T extends Comparable<T>> {
+	Node<T> head;
+	int count = 0;
 	public static class Node<T extends Comparable<T>> {
 		private T data;
-		Node<T> next;
+		private Node<T> next;
 
 		public Node(T data) {
 			this.data = data;
@@ -19,10 +21,6 @@ public class SortedLinkedList<T extends Comparable<T>> {
 			return data;
 		}
 	}
-
-	Node<T> head;
-	int count = 0;
-	boolean insert = false;
 
 	public boolean isEmpty() {
 		return head == null;

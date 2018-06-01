@@ -16,8 +16,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.bridgelabz.datastructures.Deque;
 import com.bridgelabz.datastructures.LinkedList;
@@ -239,15 +244,18 @@ public class Utility {
 	 */
 	public static int distinctCouponNumber(int randomNumber) {
 		int count = 0;
-		boolean[] isCollected = new boolean[randomNumber];
 		int distinctNumber = 0;
+		boolean[] isCollected = new boolean[randomNumber];
+		
 		while (distinctNumber < randomNumber) {
 			int value = getCoupon(randomNumber);
 			count++;
 			if (!isCollected[value]) {
 				distinctNumber++;
+				System.out.println(value);
 				isCollected[value] = true;
 			}
+			
 		}
 		return count;
 	}
@@ -540,9 +548,10 @@ public class Utility {
 	 * @param higherLimit
 	 *            print primes up to higher limit
 	 */
-	public static void findPrimeNumbers(int higherLimit) {
-		int count; // int k=0;
-		// int[] primeArray=new int[k];
+	public static int[] findPrimeNumbers(int higherLimit) {
+		int count;
+		int k = 0;
+		int[] primeArray = new int[260];
 		for (int i = 1; i <= higherLimit; i++) {
 			count = 0;
 			for (int j = 1; j <= higherLimit; j++) {
@@ -550,11 +559,12 @@ public class Utility {
 					count++;
 			}
 			if (count == 2) {
-				System.out.println(i);
-				// primeArray[k++]=i;
+				// System.out.println(i);
+				primeArray[k++] = i;
 			}
 			// isPalindrome(primeArray);
 		}
+		return primeArray;
 	}
 
 	/**
@@ -563,17 +573,46 @@ public class Utility {
 	 * @param primeArray
 	 *            to check the palindrome or not
 	 */
-	public static void isPalindrome(int[] primeArray) {
-		int reverseNumber = 0;
-		for (int i = 0; i < primeArray.length && primeArray[i] != 0; i++) {
-			while (primeArray[i] > 0) {
-				reverseNumber = reverseNumber * 10 + primeArray[i] % 10;
-				primeArray[i] = primeArray[i] / 10;
+	public static int[] isPalindrome(int[] primesAnagram) {
+		// System.out.println("Palindrome number");
+		int[] palindrome = new int[primesAnagram.length];
+		int j = 0;
+		for (int i = 0; i < primesAnagram.length; i++) {
+
+			int var = primesAnagram[i];
+			int num = primesAnagram[i];
+			int reverseNumber = 0;
+			while (num > 0) {
+				reverseNumber = reverseNumber * 10 + num % 10;
+				num = num / 10;
 			}
-			if (reverseNumber == primeArray[i]) {
-				System.out.println("palindrome" + reverseNumber);
+			if (reverseNumber == var) {
+				palindrome[j++] = var;
+				// System.out.println(var);
 			}
 		}
+		return palindrome;
+	}
+
+	public static int[] primesAnagram(int[] prime) {
+		int[] primes = prime;
+		int[] anagram = new int[primes.length];
+		int k = 0;
+		for (int i = 0; i < primes.length - 1; i++) {
+			if (prime[i] == 0) {
+				break;
+			}
+			for (int j = i + 1; j < primes.length; j++) {
+				if (isAnagram(Integer.toString(primes[i]), Integer.toString(primes[j]))) {
+					anagram[k++] = primes[i];
+					anagram[k++] = primes[j];
+				}
+				if (primes[i] == 0) {
+					break;
+				}
+			}
+		}
+		return anagram;
 	}
 
 	/**
@@ -1649,4 +1688,38 @@ public class Utility {
 		}
 		queue.display();
 	}
+
+	/*************************************************************************************
+	 * 
+	 * OOPS Problems
+	 * ***********************************************************************************
+	 */
+
+	public static void replacementOfRegx(String userName, String fullName, String mobileNo) {
+		String message = " Hello <<name>>, We have your full name as <<full name>> in our system. your contact number is 91-xxxxxxxxxx. Please,let us know in case of any clarification Thank you BridgeLabz 01/01/2016. ";
+
+		String regexName = "(\\<<)(name)(>>)";
+		String regexFullName = "(\\<<)(full name)(>>)";
+		String regexPhone = "(xxxxxxxxxx)";
+		String regexDate = "(01/01/2016)";
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
+		String todayDate = dateFormat.format(new Date());
+
+		message = regexReplace(message, regexName, userName);
+		message = regexReplace(message, regexFullName, fullName);
+		message = regexReplace(message, regexPhone, mobileNo);
+		message = regexReplace(message, regexDate, todayDate);
+		System.out.println(message);
+
+	}
+
+	public static String regexReplace(String message, String regex, String replacement) {
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(message);
+		message = matcher.replaceAll(replacement);
+		// System.out.println(message);
+		return message;
+
+	}
+
 }
