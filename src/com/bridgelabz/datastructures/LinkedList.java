@@ -164,7 +164,7 @@ public class LinkedList<T extends Comparable<T>> {
 		if (currentValue == null) {
 			System.out.println(" Data is not found");
 		}
-		previousValue.next = currentValue.next;
+		previousValue.next = currentValue;
 	}
 
 	/**
@@ -179,10 +179,10 @@ public class LinkedList<T extends Comparable<T>> {
 			return temp;
 		}
 		Node<T> t = head;
-		int count = 0;
+
 		while (count < index - 1) {
 			t = (Node<T>) t.next;
-			count++;
+
 		}
 		T temp = t.next.data;
 		t.next = t.next.next;
@@ -213,6 +213,14 @@ public class LinkedList<T extends Comparable<T>> {
 		return false;
 	}
 
+	/**
+	 * get the index value based on index
+	 * 
+	 * @param index
+	 *            to get the value
+	 * @return if the value is found then returns index value otherwise it returns
+	 *         null
+	 */
 	public T getIndexValue(int index) {
 		Node<T> temp = head;
 		int count = 0;
@@ -232,7 +240,7 @@ public class LinkedList<T extends Comparable<T>> {
 
 	public int size() {
 		Node<T> temp = head;
-		int count = 0;
+		
 		if (temp == null) {
 			return 0;
 		}

@@ -15,6 +15,7 @@ public class BinaryToDecimal {
 		else {
 			System.out.println("Nothing");
 		}
+		
 	}
 
 }

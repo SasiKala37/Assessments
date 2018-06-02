@@ -10,20 +10,20 @@ public class BinarySearch {
 		Integer size = utility.userInputInteger();
 
 		System.out.println("Enter elements");
-		Integer[] arrayData = new Integer[size];
+		String[] arrayData = new String[size];
 		for (int i = 0; i < arrayData.length; i++) {
-			arrayData[i]=utility.userInputInteger();
+			arrayData[i]=utility.userInputString();
 		}
-		
+		Utility.bubbleSort(arrayData);
 
 		System.out.println("Enter Searchelment");
-		Integer searchElement = utility.userInputInteger();
+		String searchElement = utility.userInputString();
 		
 		Integer result = Utility.search(arrayData, searchElement, 0, (arrayData.length - 1));
-		if (result != -1) {
-			System.out.println("search element is found");
-		} else {
+		if (result == -1) {
 			System.out.println("search element is not found");
+		} else {
+			System.out.println("search element is  found");
 		}
 	}
 }

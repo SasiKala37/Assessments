@@ -10,7 +10,7 @@ public class Hashing {
 
 	public static void main(String[] args) throws Exception {
 		Utility utility=new Utility();
-	
+		HashTableChaining hashTableChaining=  new HashTableChaining(12);
 	        File file = new File("/home/bridgelabz/sasi-txtdocuments/hash.txt");
 	        FileReader fileReader = null;
 	        BufferedReader bufferedReader = null;
@@ -31,10 +31,10 @@ public class Hashing {
 	                    array1[i] = Integer.parseInt(array[i]);
 	                }
 	               
-	                 new HashTableChaining(12);
+	                
 	               Integer[] sortedArray= Utility.insertionSort(array1);
 	                for (int i = 0; i < sortedArray.length; i++) {
-	                    HashTableChaining.insert(sortedArray[i]);
+	                    hashTableChaining.insert(sortedArray[i]);
 	                }
 	            }
 	        } catch (Exception e) {
@@ -42,22 +42,22 @@ public class Hashing {
 	        }
 	       
 	        System.out.println("Contents of hash list...");
-	        HashTableChaining.printHashTable ();
+	        hashTableChaining.printHashTable ();
 	       
 	       
 	        System.out.println("Enter the word you want to search");
 	        int integerToSearch = utility.userInputInteger();
 	       
-	        if(HashTableChaining.contains(integerToSearch)) {
-	            HashTableChaining.remove(integerToSearch);
+	        if(hashTableChaining.contains(integerToSearch)) {
+	            hashTableChaining.remove(integerToSearch);
 	        }
 	       
 	        else {
-	            HashTableChaining.insert(integerToSearch);
+	            hashTableChaining.insert(integerToSearch);
 	        }
 
 	       
-	        HashTableChaining.printHashTable ();
+	        hashTableChaining.printHashTable ();
 	       
 	    
 	}

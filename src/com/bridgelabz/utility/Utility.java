@@ -159,8 +159,8 @@ public class Utility {
 	 */
 	public void primeFactors(int N) {
 		for (int i = 2; i * i <= N; i++) {
-			int result = N % i;
-			while (result == 0) {
+
+			while (N % i == 0) {
 				System.out.print(i + "  ");
 				N = N / i;
 			}
@@ -246,7 +246,7 @@ public class Utility {
 		int count = 0;
 		int distinctNumber = 0;
 		boolean[] isCollected = new boolean[randomNumber];
-		
+
 		while (distinctNumber < randomNumber) {
 			int value = getCoupon(randomNumber);
 			count++;
@@ -255,11 +255,31 @@ public class Utility {
 				System.out.println(value);
 				isCollected[value] = true;
 			}
-			
+
 		}
 		return count;
 	}
 
+	/*
+	 * public void playCrossGame() { String[] board; String turn;
+	 * System.out.println("please enter any number to start the game"); int in =
+	 * userInputInteger(); board = new String[9]; turn = "X"; String winner = null;
+	 * populateEmptyBoard(); System.out.println("Welcome to A Player Tic Tac Toe.");
+	 * System.out.println("--------------------------------"); printBoard();
+	 * System.out.println("player B turn Enter a slot number to place X ");
+	 * 
+	 * while (winner == null) { int numInput; numInput = userInputInteger(); if
+	 * (!(numInput > 0 && numInput <= 9)) {
+	 * System.out.println("Invalid input; re-enter slot number:"); continue; }
+	 * 
+	 * if (board[numInput - 1].equals(String.valueOf(numInput))) { board[numInput -
+	 * 1] = turn; if (turn.equals("X")) { turn = "O"; } else { turn = "X"; }
+	 * printBoard(); winner = checkWinner(); } else {
+	 * System.out.println("Slot already taken, take slot number:"); continue; } } if
+	 * (winner.equalsIgnoreCase("draw")) { System.out.println("It's a draw!"); }
+	 * else { System.out.println("Congratulations! " + winner + "'s have won! ."); }
+	 * }
+	 */
 	/**
 	 * calculate the percentage of win and loss gambler
 	 * 
@@ -559,7 +579,7 @@ public class Utility {
 					count++;
 			}
 			if (count == 2) {
-				// System.out.println(i);
+				System.out.println(i);
 				primeArray[k++] = i;
 			}
 			// isPalindrome(primeArray);
@@ -644,17 +664,19 @@ public class Utility {
 	 * @param amount
 	 *            to generate notes equal to the amount
 	 */
-	public static void generateChange(int amount) {
-		int[] ar = { 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000 };
+	static int count = 0;
+
+	public static int generateChange(int amount) {
+		int[] ar = { 1, 2, 5, 10, 20, 50, 100, 500, 1000 };
 		int temp = 0;
 		int index = 0;
-		int count = 0;
+
 		for (int i = 0; i < ar.length; i++) {
 			if (amount == ar[i]) {
 				System.out.println("The amount note ");
 				System.out.println(amount);
 				count++;
-				return;
+				return count;
 			}
 		}
 
@@ -667,17 +689,30 @@ public class Utility {
 				}
 			}
 		}
-
-		System.out.print(temp + "  ");
-		int goal = amount - temp;
-		for (int i = index; i >= 0; i--) {
-			if (goal == ar[i]) {
-				System.out.print(ar[i] + "  ");
-				return;
+		if (amount > 1000) {
+			int remainder = amount % 1000;
+			int result = amount / 1000;
+			for (int i = 0; i < result; i++) {
+				System.out.print(1000 + " ");
+				count++;
 			}
+			generateChange(remainder);
+		} else {
+			System.out.print(temp + "  ");
+			count++;
+			int goal = amount - temp;
+			for (int i = index; i >= 0; i--) {
+				if (goal == ar[i]) {
+					System.out.print(ar[i] + "  ");
+					count++;
+					return count;
+				}
 
+			}
+			generateChange(goal);
 		}
-		generateChange(goal);
+
+		return count;
 	}
 
 	/**
@@ -840,7 +875,7 @@ public class Utility {
 			for (int i = 0; i < array.length; i++) {
 				stringBack += array[i];
 			}
-			stringBack.replaceAll("\\s", "");
+			stringBack = stringBack.trim();
 			System.out.println("After swapping: ");
 			System.out.println(stringBack);
 			int decimal = binaryToDecimal(stringBack);
@@ -1055,7 +1090,8 @@ public class Utility {
 		int result;
 
 		try {
-			BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
+			BufferedReader bufferedReader = new BufferedReader(
+					new FileReader(new File(filePath)));
 			while ((line = bufferedReader.readLine()) != null) {
 				String[] words = line.split(",");
 				bubbleSort(words);
@@ -1187,7 +1223,7 @@ public class Utility {
 	 * @throws FileNotFoundException
 	 *             it throw this exception when file is not found
 	 */
-	public void unorderedFile(String searchData) throws FileNotFoundException {
+	public void unorderedFile() throws FileNotFoundException {
 		File file = new File("/home/bridgelabz/sasi-txtdocuments/names.txt");
 
 		try {
@@ -1200,12 +1236,14 @@ public class Utility {
 
 				}
 			}
-			bufferedReader.close();
+			//bufferedReader.close();
 			System.out.println("File content:");
 			linkedList.traverse();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Enter the search word");
+        String searchData=userInputString();
 
 		if (linkedList.search(searchData)) {
 			linkedList.remove(searchData);
@@ -1230,20 +1268,27 @@ public class Utility {
 	 * @throws FileNotFoundException
 	 *             it throw this exception when file is not found
 	 */
-	public void orderedFile(int searchNumber) throws FileNotFoundException {
-		File file = new File("/home/bridgelabz/sasi-txtdocuments/numbers.txt");
+	public void orderedFile(File file) throws FileNotFoundException {
+		//File file = new File(filePath);
 		try {
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 			String line = "";
-			int[] number = new int[15];
-			int k = 0;
+			
+			
 			while ((line = bufferedReader.readLine()) != null) {
 				String[] words = line.split(",");
 				for (int i = 0; i < words.length; i++) {
-					number[++k] = Integer.parseInt(words[i]);
-					sortedLinkedList.addSorted(number[k]);
-
+					System.out.println(words[i]);
 				}
+				Integer[] number = new Integer[words.length];
+				for (int i = 0; i < words.length; i++) {
+					number[i] = Integer.parseInt(words[i]);
+				}
+				Integer[] sortArray=insertionSort(number);
+				for (int i = 0; i < sortArray.length; i++) {
+					sortedLinkedList.add(sortArray[i]);
+				}
+					
 			}
 
 			System.out.println("File content:");
@@ -1251,6 +1296,8 @@ public class Utility {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Enter the search number");
+        int searchNumber=userInputInteger();
 		if (sortedLinkedList.search(searchNumber)) {
 			sortedLinkedList.remove(searchNumber);
 			sortedLinkedList.display();
@@ -1258,8 +1305,8 @@ public class Utility {
 			sortedLinkedList.addSorted(searchNumber);
 
 		}
-		// System.out.println("Edited file content");
-
+		 System.out.println("Edited file content");
+		 sortedLinkedList.display();
 		PrintWriter printWriter = new PrintWriter(file);
 		for (int i = 0; i < sortedLinkedList.size(); i++) {
 
@@ -1719,6 +1766,35 @@ public class Utility {
 		message = matcher.replaceAll(replacement);
 		// System.out.println(message);
 		return message;
+
+	}
+
+	public static int getrandom() {
+		Random random = new Random();
+		return (random.nextInt(14));
+	}
+
+	public static void cardShuffling() {
+		String[] suit = { "Clubs", "Diamonds", "Hearts", "Spades" };
+		String[] rank = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace" };
+		// int range=suit.length+rank.length;
+		String[] cards = new String[9];
+		for (int i = 0; i < rank.length; i++) {
+			for (int j = 0; j < suit.length; j++) {
+
+				cards[suit.length * i + j] = rank[i] + "-" + suit[j];
+
+			}
+		}
+		for (int i = 0; i < 9; i++) {
+			int random = i + getrandom();
+			String temp = cards[random];
+			cards[random] = cards[i];
+			cards[i] = temp;
+		}
+		for (int i = 0; i < cards.length; i++) {
+			System.out.println(cards[i]);
+		}
 
 	}
 

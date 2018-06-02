@@ -8,9 +8,8 @@ public class UnOrderedList {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		Utility utility=new Utility();
-		System.out.println("Enter the search word");
-        String searchData=utility.userInputString();
-        utility.unorderedFile(searchData);
+		
+        utility.unorderedFile();
 	}
 
 }

@@ -3,7 +3,7 @@ package com.bridgelabz.datastructures;
 public class Stack<T extends Comparable<T>> {
 	Node<T> top;
 	int size = 0;
-
+    LinkedList<T> linkedList=new LinkedList<>();
 	public static class Node<T extends Comparable<T>> {
 		private Node<T> next;
 		private T data;
@@ -30,8 +30,9 @@ public class Stack<T extends Comparable<T>> {
 		if (top == null) {
 			top = node;
 		} else {
-			node.next = top;
-			top = node;
+			linkedList.addLast(data);
+			/*node.next = top;
+			top = node;*/
 		}
 		size++;
 	}
@@ -39,6 +40,7 @@ public class Stack<T extends Comparable<T>> {
 	/**
 	 * Display the stack data
 	 */
+	
 	public void traverse() {
 		Node<T> temp = top;
 		if (temp == null) {

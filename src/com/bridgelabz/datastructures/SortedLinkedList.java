@@ -1,5 +1,7 @@
 package com.bridgelabz.datastructures;
 
+import com.bridgelabz.datastructures.LinkedList.Node;
+
 public class SortedLinkedList<T extends Comparable<T>> {
 	Node<T> head;
 	int count = 0;
@@ -74,19 +76,7 @@ public class SortedLinkedList<T extends Comparable<T>> {
 		return false;
 	}
 
-	/**
-	 * Method to find size
-	 */
-	public int getCount() {
-		Node<T> temp = head;
-		int count = 0;
-		while (temp != null) {
-			count++;
-			temp = temp.next;
-		}
-		return count;
-	}
-
+	
 	/**
 	 * Method to remove element at index
 	 */
@@ -98,10 +88,10 @@ public class SortedLinkedList<T extends Comparable<T>> {
 			return temp;
 		}
 		Node<T> t = head;
-		int count = 0;
+		
 		while (count < index - 1) {
 			t = (Node<T>) t.next;
-			count++;
+			
 		}
 		T temp = t.next.data;
 		t.next = t.next.next;
@@ -110,51 +100,44 @@ public class SortedLinkedList<T extends Comparable<T>> {
 	}
 
 	/**
-	 * Method to remove reference element node
+	 * remove data from the linked list
 	 *
-	 * @param reference
+	 * @param data
+	 *            data pass to remove
 	 */
-	public void remove(T reference) {
+	public void remove(T data) {
 		if (head == null) {
-			System.out.println("Head cannot be null!!");
-		}
-		if (head.data.equals(reference)) {
-			head = head.next;
+			System.out.println("empty list");
 			return;
 		}
-
-		Node<T> cur = head;
-		Node<T> prev = null;
-
-		while (cur != null && !cur.data.equals(reference)) {
-			prev = cur;
-			cur = cur.next;
+		if (head.data.compareTo(data)==0) {
+			head = head.next;
+			count--;
+			return;
 		}
-
-		if (cur == null) {
-			System.out.println("cannot be null!!");
+		Node<T> currentValue = head;
+		Node<T> previousValue = null;
+		while (currentValue != null && !currentValue.data.equals(data)) {
+			previousValue = currentValue;
+			currentValue = currentValue.next;
 		}
-		prev.next = cur.next;
+		if (currentValue == null) {
+			System.out.println(" Data is not found");
+		}
+		previousValue.next = currentValue.next;
+		count--;
 	}
 
-	public Object removeFirst() {
-		Object temp = head.data;
-		head = (Node<T>) head.next;
+	public T removeFirst() {
+		T temp = head.data;
+		head =  head.next;
 		count--;
 		return temp;
 	}
 
-	public void reverse(Node<T> start) {
-		if (start.next != null) {
-			reverse(start.next);
-		}
-	}
+	
 
-	public void reverse() {
-		reverse(head);
-	}
-
-	public void displayMid() {
+	/*public void displayMid() {
 		Node<T> mid = head;
 		int count = 0;
 		while (count != count / 2) {
@@ -162,8 +145,13 @@ public class SortedLinkedList<T extends Comparable<T>> {
 			count++;
 		}
 		System.out.println(mid.data);
-	}
+	}*/
 
+	/**
+	 * to get index of the particular value
+	 * @param index
+	 * @return
+	 */
 	public T getNth(int index) {
 		Node<T> temp = head;
 		int count = 0;
@@ -177,7 +165,33 @@ public class SortedLinkedList<T extends Comparable<T>> {
 		return null;
 
 	}
+	/**
+	 * insert the data in linked list
+	 * 
+	 * @param data
+	 *            insert data into the linked list
+	 */
+	public void add(T data) {
+		Node<T> new_node = new Node<T>(data);
+		if (head == null) {
+			head = new_node;
+			count++;
+			return;
+		}
+		Node<T> temp = head;
+		while (temp.next != null) {
+			temp = (Node<T>) temp.next;
 
+		}
+		temp.next = new_node;
+		count++;
+	}
+	/**
+	 * insert the data in linked list
+	 * 
+	 * @param data
+	 *            insert data into the linked list
+	 */
 	public void addSorted(T data) {
 		Node<T> current;
 		Node<T> new_node = new Node<T>(data);

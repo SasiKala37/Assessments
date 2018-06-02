@@ -45,7 +45,7 @@ public class GregorianCalender {
 			result += "friday";
 			break;
 		case 6:
-			result += "satday";
+			result += "saturday";
 			break;
 		default:
 			System.out.println("Nothing");

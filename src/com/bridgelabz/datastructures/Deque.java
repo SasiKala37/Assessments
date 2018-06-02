@@ -1,8 +1,10 @@
 package com.bridgelabz.datastructures;
 
-
-
 public class Deque<T extends Comparable<T>> {
+	Node<T> rear;
+	Node<T> front;
+	int count = 0;
+
 	public static class Node<T extends Comparable<T>> {
 		private Node<T> next;
 		private T data;
@@ -34,18 +36,30 @@ public class Deque<T extends Comparable<T>> {
 		}
 	}
 
-	Node<T> rear;
-	Node<T> front;
-	int count = 0;
-
+	/**
+	 * check Queue is empty or not
+	 * 
+	 * @return it returns true or false whether it is empty or not
+	 */
 	public boolean isEmpty() {
 		return front == null;
 	}
 
+	/**
+	 * find the size of queue
+	 * 
+	 * @return returns the count which indicates the number of elements in the queue
+	 */
 	public int size() {
 		return count;
 	}
 
+	/**
+	 * Insert data at front
+	 * 
+	 * @param data
+	 *            value to insert
+	 */
 	public void insertAtFront(T data) {
 		Node<T> newNode = new Node<T>(data, null);
 		if (front == null) {
@@ -87,7 +101,7 @@ public class Deque<T extends Comparable<T>> {
 		if (isEmpty()) {
 			System.out.println("Empty Queue");
 		}
-		 T tempData=rear.getData();
+		T tempData = rear.getData();
 		Node<T> sample = front;
 		Node<T> temp = front;
 		while (sample != rear) {
@@ -97,7 +111,7 @@ public class Deque<T extends Comparable<T>> {
 		rear = temp;
 		rear.setNext(null);
 		count--;
-		 return tempData;
+		return tempData;
 	}
 
 	public void display() {
@@ -110,7 +124,7 @@ public class Deque<T extends Comparable<T>> {
 			temp = temp.getNext();
 		}
 	}
-	
+
 	public T peekAtFront() {
 		if (isEmpty()) {
 			System.out.println("Empty deque");
