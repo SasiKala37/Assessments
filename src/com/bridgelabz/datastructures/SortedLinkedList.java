@@ -1,7 +1,5 @@
 package com.bridgelabz.datastructures;
 
-import com.bridgelabz.datastructures.LinkedList.Node;
-
 public class SortedLinkedList<T extends Comparable<T>> {
 	Node<T> head;
 	int count = 0;

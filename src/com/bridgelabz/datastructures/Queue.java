@@ -73,7 +73,7 @@ public class Queue<T extends Comparable<T>> {
 		Node<T> temp = front;
 		// System.out.println("Queue elements");
 		while (temp != rear.next) {
-			System.out.print(temp.data);
+			System.out.print(temp.data+" ");
 			temp = temp.next;
 		}
 	}
@@ -96,7 +96,7 @@ public class Queue<T extends Comparable<T>> {
 		}
 		Node<T> temp = front;
 		while (temp != rear.next) {
-			System.out.print(temp.data);
+			System.out.print(temp.data+" ");
 			temp = temp.next;
 		}
 		System.out.println();

@@ -1,5 +1,7 @@
 package com.bridgelabz.datastructures;
 
+import com.bridgelabz.datastructures.SortedLinkedList.Node;
+
 public class LinkedList<T extends Comparable<T>> {
 	Node<T> head;
 	int count = 0;
@@ -151,8 +153,9 @@ public class LinkedList<T extends Comparable<T>> {
 			System.out.println("empty list");
 			return;
 		}
-		if (head.data.equals(data)) {
+		if (head.data.compareTo(data) == 0) {
 			head = head.next;
+			count--;
 			return;
 		}
 		Node<T> currentValue = head;
@@ -164,7 +167,8 @@ public class LinkedList<T extends Comparable<T>> {
 		if (currentValue == null) {
 			System.out.println(" Data is not found");
 		}
-		previousValue.next = currentValue;
+		previousValue.next = currentValue.next;
+		count--;
 	}
 
 	/**
@@ -240,7 +244,7 @@ public class LinkedList<T extends Comparable<T>> {
 
 	public int size() {
 		Node<T> temp = head;
-		
+
 		if (temp == null) {
 			return 0;
 		}

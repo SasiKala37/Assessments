@@ -6,7 +6,7 @@ public class PrimeStack {
 
 	public static void main(String[] args) {
 		Utility.primeAnagramStack();
-		
+		System.out.println("Queue elements");
 		Utility.angramPrimeQ();
 	}
 

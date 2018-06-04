@@ -55,7 +55,9 @@ public class Utility {
 	public boolean userInputBoolean() {
 		return scanner.nextBoolean();
 	}
-
+	public Long userInputLong() {
+		return scanner.nextLong();
+	}
 	/**
 	 * Replace with the String template
 	 * 
@@ -1090,8 +1092,7 @@ public class Utility {
 		int result;
 
 		try {
-			BufferedReader bufferedReader = new BufferedReader(
-					new FileReader(new File(filePath)));
+			BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(filePath)));
 			while ((line = bufferedReader.readLine()) != null) {
 				String[] words = line.split(",");
 				bubbleSort(words);
@@ -1224,40 +1225,46 @@ public class Utility {
 	 *             it throw this exception when file is not found
 	 */
 	public void unorderedFile() throws FileNotFoundException {
-		File file = new File("/home/bridgelabz/sasi-txtdocuments/names.txt");
+		File file = new File("/home/bridgelabz/Desktop/text");
 
 		try {
+			@SuppressWarnings("resource")
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 			String line = "";
+			//String[] words=new words[20];
 			while ((line = bufferedReader.readLine()) != null) {
 				String[] words = line.split(",");
 				for (int i = 0; i < words.length; i++) {
-					linkedList.addLast(words[i]);
-
+					linkedList.add(words[i]);
 				}
 			}
-			//bufferedReader.close();
+			
+
 			System.out.println("File content:");
 			linkedList.traverse();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Enter the search word");
-        String searchData=userInputString();
-
-		if (linkedList.search(searchData)) {
-			linkedList.remove(searchData);
+		System.out.println("Enter the search value");
+		String searchValue = userInputString();
+		
+		if (linkedList.search(searchValue)) {
+			linkedList.remove(searchValue);
+			//linkedList.traverse();
 		} else {
-			linkedList.addLast(searchData);
+			linkedList.addLast(searchValue);
+
 		}
 		System.out.println("Edited file content");
 		linkedList.traverse();
 		PrintWriter printWriter = new PrintWriter(file);
-		for (int i = 1; i <= linkedList.size(); i++) {
-			String word = linkedList.getIndexValue(i);
-			printWriter.print(word + ",");
+		for (int i = 0; i < linkedList.size(); i++) {
+
+			printWriter.print(linkedList.getIndexValue(i) + ",");
 		}
 		printWriter.close();
+
 	}
 
 	/**
@@ -1269,12 +1276,11 @@ public class Utility {
 	 *             it throw this exception when file is not found
 	 */
 	public void orderedFile(File file) throws FileNotFoundException {
-		//File file = new File(filePath);
+		// File file = new File(filePath);
 		try {
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 			String line = "";
-			
-			
+
 			while ((line = bufferedReader.readLine()) != null) {
 				String[] words = line.split(",");
 				for (int i = 0; i < words.length; i++) {
@@ -1284,11 +1290,11 @@ public class Utility {
 				for (int i = 0; i < words.length; i++) {
 					number[i] = Integer.parseInt(words[i]);
 				}
-				Integer[] sortArray=insertionSort(number);
+				Integer[] sortArray = insertionSort(number);
 				for (int i = 0; i < sortArray.length; i++) {
 					sortedLinkedList.add(sortArray[i]);
 				}
-					
+
 			}
 
 			System.out.println("File content:");
@@ -1297,7 +1303,7 @@ public class Utility {
 			e.printStackTrace();
 		}
 		System.out.println("Enter the search number");
-        int searchNumber=userInputInteger();
+		int searchNumber = userInputInteger();
 		if (sortedLinkedList.search(searchNumber)) {
 			sortedLinkedList.remove(searchNumber);
 			sortedLinkedList.display();
@@ -1305,8 +1311,8 @@ public class Utility {
 			sortedLinkedList.addSorted(searchNumber);
 
 		}
-		 System.out.println("Edited file content");
-		 sortedLinkedList.display();
+		System.out.println("Edited file content");
+		sortedLinkedList.display();
 		PrintWriter printWriter = new PrintWriter(file);
 		for (int i = 0; i < sortedLinkedList.size(); i++) {
 
@@ -1370,7 +1376,7 @@ public class Utility {
 			int[] result = findPrime(low, high);
 			for (int j = 0; j < prime[i].length; j++) {
 				prime[i][j] = result[k++];
-				System.out.print(prime[i][j] + " ");
+				System.out.format("%4d",prime[i][j] );
 
 				if (result[k] == 0) {
 					break;
@@ -1407,7 +1413,8 @@ public class Utility {
 					if (isAnagram(Integer.toString(prime[i]), Integer.toString(prime[j]))) {
 						anagram[k++] = prime[i];
 						anagram[k++] = prime[j];
-						System.out.print(prime[i] + " " + prime[j] + " ");
+						// System.out.format("%4d",prime[i]);
+						// System.out.format("%4d",prime[j]);
 					}
 					if (prime[j] == 0) {
 						break;
@@ -1415,7 +1422,7 @@ public class Utility {
 				}
 
 			}
-			System.out.println();
+			 //System.out.println();
 		}
 		/*
 		 * for (int i = 0; i < nonanagram.length; i++) { for (int j = 0; j <nonanagram
@@ -1717,9 +1724,19 @@ public class Utility {
 				continue;
 			}
 			stack.push(anagram[i]);
+
 		}
-		stack.traverse();
+		// StackReverse<Integer> stackReverse=new StackReverse<>();
+		int size = stack.size();
+
+		for (int i = 0; i < size; i++) {
+
+			System.out.println(stack.pop());
+		}
+
 	}
+
+	// }
 
 	/**
 	 * Store the prime anagram numbers in Queue and print it

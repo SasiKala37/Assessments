@@ -44,11 +44,15 @@ public class StackReverse<T extends Comparable<T>> {
 		if (temp == null) {
 			System.out.println("Empty stack");
 		}
-		System.out.println("Pushed Elements: ");
+		//System.out.println("Pushed Elements: ");
+		for(int i=0;i<100;i++) {
 		while (temp != null) {
-			System.out.println(temp.data);
+			//System.out.print(temp.data+" ");
+			T array=(T) temp.data;
 			temp = temp.next;
-		}
+			
+			
+		}}
 	}
 
 	/**
@@ -114,5 +118,25 @@ public class StackReverse<T extends Comparable<T>> {
 			System.out.println();
 		}
 
+	}
+	public void traversePrime() {
+		Node<T> temp = top;
+		if (temp == null) {
+			System.out.println("Empty stack");
+		}
+		//System.out.println("Pushed Elements: ");
+		int low=0;int high=100;
+		while(low<high) {
+			if(temp.data.compareTo((T) Integer.toString(high))<0) {
+				if(temp!=null) {
+					System.out.println(temp.data+" ");
+					temp = temp.next;
+				}
+			}
+			low=low+100;
+			high=low+100;
+			System.out.println();
+		}
+		
 	}
 }
