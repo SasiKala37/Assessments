@@ -1786,33 +1786,62 @@ public class Utility {
 
 	}
 
-	public static int getrandom() {
-		Random random = new Random();
-		return (random.nextInt(14));
+	//cards initialization
+	/**
+	 * @param deck
+	 * @param SUIT
+	 * @param RANK
+	 * @return
+	 */
+	public static String[][] cardsIntialization(String[][] deck,String[] SUIT,String[] RANK)
+	{
+	    for(int i=0;i<SUIT.length;i++)
+	    {
+	        for(int j=0;j<RANK.length;j++)
+	        {
+	            deck[i][j]=SUIT[i]+" - " +RANK[j];
+	        }
+	    }
+	    return deck;
 	}
-
-	public static void cardShuffling() {
-		String[] suit = { "Clubs", "Diamonds", "Hearts", "Spades" };
-		String[] rank = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace" };
-		// int range=suit.length+rank.length;
-		String[] cards = new String[9];
-		for (int i = 0; i < rank.length; i++) {
-			for (int j = 0; j < suit.length; j++) {
-
-				cards[suit.length * i + j] = rank[i] + "-" + suit[j];
-
-			}
-		}
-		for (int i = 0; i < 9; i++) {
-			int random = i + getrandom();
-			String temp = cards[random];
-			cards[random] = cards[i];
-			cards[i] = temp;
-		}
-		for (int i = 0; i < cards.length; i++) {
-			System.out.println(cards[i]);
-		}
-
+	//shuffling cards
+	/**
+	 * @param deck
+	 * @param suitsize
+	 * @param ranksize
+	 * @return
+	 */
+	public static String[][] shufflingCards(String[][] deck,int suitsize,int ranksize)
+	{
+	    for(int i=0;i<suitsize;i++)
+	    {
+	        for(int j=0;j<ranksize;j++)
+	        {
+	       int random=(int)(Math.random()*suitsize);
+	       int random1=(int)(Math.random()*ranksize);
+	       String temp=deck[random][random1];
+	       deck[random][random1]=deck[i][j];
+	       deck[i][j]=temp;
+	        }
+	    }
+	    return deck;
 	}
-
+	//printing cards
+	/**
+	 * @param deck
+	 */
+	public static void  printingcards(String[][] deck)
+	{
+	    for(int i=0;i<4;i++)
+	    {
+	        System.out.println("person "+ (i+1));
+	        for(int j=0;j<9;j++)
+	        {
+	            System.out.println(deck[i][j]+" ");
+	        }
+	        System.out.println();
+	    }
+	}
+   
+	
 }

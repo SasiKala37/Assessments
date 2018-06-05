@@ -4,9 +4,15 @@ import com.bridgelabz.utility.Utility;
 
 public class DeckOfCards {
 
-	public static void main(String[] args) {
-		
-		Utility.cardShuffling();
-	}
-
+	 static String[] SUIT= {"Clubs","Diamonds", "Hearts", "Spades"};
+	    static String[] RANK= {"2", "3", "4", "5", "6", "7", "8", "9", "10",
+	            "Jack", "Queen", "King", "Ace"    };
+	    static String[][] deck=new String[SUIT.length][RANK.length];
+	    public static void main(String[] args) {
+	        Utility.cardsIntialization(deck,SUIT,RANK);
+	        Utility.shufflingCards(deck, SUIT.length,RANK.length);
+	        Utility.printingcards(deck);
+	        
+	        
+	    }
 }
