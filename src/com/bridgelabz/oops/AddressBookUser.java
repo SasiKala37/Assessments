@@ -1,5 +1,6 @@
 package com.bridgelabz.oops;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.codehaus.jackson.JsonGenerationException;
@@ -24,39 +25,18 @@ public class AddressBookUser {
 		System.out.println("7:print entries");
 		System.out.println("8:Exit");
 		int choice = 0;
-		while (choice < 8) {
+		while (choice < 9) {
 			System.out.println("Enter your choice ");
 			choice = utility.userInputInteger();
 			switch (choice) {
 			case 1:
+				
 				controller.doNew();
+				
 				break;
 			case 2:
-				System.out.println("Enter first name");
-				String firstName = utility.userInputString();
-	
-				System.out.println("Enter last name");
-				String lastName = utility.userInputString();
 				
-				System.out.println("Enter Adaress ");
-				String address = utility.userInputString();
-				
-				System.out.println("Enter city");
-				String city = utility.userInputString();
-				
-				System.out.println("Enter state");
-				String state = utility.userInputString();
-				
-				System.out.println("Enter zip");
-				String zip = utility.userInputString();
-				
-				System.out.println("Enter phone");
-				String phone = utility.userInputString();
-				
-				System.out.println("Enter file name which you want to add");
-				String fileName=utility.userInputString();
-				
-				controller.doAdd( firstName,  lastName,  address,  city,  state,  zip, phone,fileName);
+				controller.doAdd();
 				break;
 			case 3:
 				System.out.println("Enter index to edit");
@@ -78,9 +58,14 @@ public class AddressBookUser {
 				controller.doSortByZip();
 				break;
 			case 7:
-				System.out.println("Print all entries");
-				controller.doPrint();
+				System.out.println("enter index to get person information");
+				int indexp=utility.userInputInteger();
+				controller.doGet(indexp);
 				break;
+			case 8:System.out.println("enter index to get person name");
+			int indexn=utility.userInputInteger();
+			controller.doGetPersonName(indexn);
+				
 			default: System.out.println("wrong input");
 			break;
 			}

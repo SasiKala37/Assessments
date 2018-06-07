@@ -3,13 +3,17 @@ package com.bridgelabz.oops;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Observable;
 
 import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONArray;
@@ -20,45 +24,23 @@ import org.json.simple.parser.ParseException;
 import com.bridgelabz.utility.Utility;
 
 public class AddressBook extends Observable implements Serializable {
-	ArrayList<Person> personDetails = new ArrayList<>();
-	ArrayList<AddressBook> addressBookList=new ArrayList<>();
-	LinkedList<File> addressFiles=new LinkedList<>();
-	Object object=new Object();
+	//add the person details
+	ArrayList<Object> arrayList = new ArrayList<>();
+
+	//add files into the directory
+	ArrayList<Object> addressFiles = new ArrayList<>();
+	
 	Person.CompareByName compareByName = new Person.CompareByName();
 	Person.CompareByZip compareByZip = new Person.CompareByZip();
-	Person person;
+	
+	Person person = new Person();
 	Utility utility = new Utility();
 	ObjectMapper mapper = new ObjectMapper();
-	/*public AddressBook() throws JsonGenerationException, JsonMappingException, IOException {
-		System.out.println("Enter the new address book name");
-		String addressBookName = utility.userInputString();
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.writeValue(new File("/home/bridgelabz/Documents/json/" + addressBookName + ".json"),personDetails);
-		
-	}
-	*/
-	
-	public AddressBook() throws JsonGenerationException, JsonMappingException, IOException, ParseException {
-		System.out.println("Enter the new address book name");
-		String addressBookName = utility.userInputString();
-		File file=new File("/home/bridgelabz/Documents/json/" + addressBookName + ".json");
-		addressFiles.add(file);
-		/*System.out.println("enter no. of persons list");
-		int noOfPerson = utility.userInputInteger();
-		for (int i = 0; i < noOfPerson; i++) {
-			person = personData();
-			personDetails.add(person);
-		}*/
-		//addressFiles.add(new File("/home/bridgelabz/Documents/json/" + addressBookName + ".json"));
-		
-		mapper.writeValue(file,addressFiles);
-		/*JSONParser parser = new JSONParser();
-		Object obj = parser.parse(new FileReader("/home/bridgelabz/Documents/json/" + addressBookName + ".json"));
-		JSONObject jsonobject = (JSONObject) obj;
-		JSONArray personArray = (JSONArray) jsonobject.get("personDetails");*/
+	//default constructor
+	public AddressBook() {
+
 	}
 
-	
 	/**
 	 * @param firstName
 	 *            the person's first name
@@ -74,54 +56,81 @@ public class AddressBook extends Observable implements Serializable {
 	 *            the person's zip
 	 * @param phone
 	 *            the person's phone
-	 * @throws IOException 
-	 * @throws JsonMappingException 
-	 * @throws JsonGenerationException 
+	 * @throws IOException
+	 * @throws JsonMappingException
+	 * @throws JsonGenerationException
+	 * @throws ParseException
 	 */
 	public void addPerson(String firstName, String lastName, String address, String city, String state, String zip,
-			String phone,String fileName) throws JsonGenerationException, JsonMappingException, IOException {
-	      File file =new File("/home/bridgelabz/Documents/json/" +fileName+".json");
-		
+			String phone, String file)
+			throws JsonGenerationException, JsonMappingException, IOException, ParseException {
+		arrayList = pareseFile(file);
 		person = new Person(firstName, lastName, address, city, state, zip, phone);
-		personDetails.add(person);
-		mapper.writeValue(file, personDetails);
-		
+		arrayList.add(person);
+		File file1 = new File(file);
+		mapper.writeValue(file1, arrayList);
+
+		System.out.println(arrayList.toString());
+	}
+
+	@SuppressWarnings("unchecked")
+	public ArrayList<Object> pareseFile(String fileName) throws FileNotFoundException, IOException, ParseException {
+		JSONParser parser = new JSONParser();
+		Object object = parser.parse(new FileReader(new File(fileName)));
+		JSONArray array = (JSONArray) object;
+		ArrayList<Object> arrayList = new ArrayList<>();
+		for (int i = 0; i < array.size(); i++) {
+			JSONObject obj = (JSONObject) array.get(i);
+			arrayList.add(obj);
+		}
+		return arrayList;
 	}
 
 	/**
 	 * @return the number of persons in the collection
+	 * @throws ParseException
+	 * @throws IOException
+	 * @throws FileNotFoundException
 	 */
-	public int getNumberOfPersons() {
-		return personDetails.size();
+	public int getNumberOfPersons(String file) throws FileNotFoundException, IOException, ParseException {
+		arrayList = pareseFile(file);
+		return arrayList.size();
 	}
 
 	/**
 	 * @param index
 	 *            the position of the desired person
 	 * @return the person's full name, in a form suitable for displaying or printing
+	 * @throws ParseException
+	 * @throws IOException
+	 * @throws FileNotFoundException
 	 */
-	public String getFullNameOfPerson(int index) {
-		String fullName = "";
-		if (index == personDetails.indexOf(person)) {
-			fullName = person.getFirstName() + " " + person.getLastName();
-		}
+	public String getFullNameOfPerson(int index, String file)
+			throws FileNotFoundException, IOException, ParseException {
+		arrayList = pareseFile(file);
+
+		JSONObject jsonObject = (JSONObject) arrayList.get(index);
+		String fullName = (String) jsonObject.get("firstName") + " " + (String) jsonObject.get("lastName");
 		return fullName;
 	}
 
 	/**
 	 * @param index
 	 * @return
+	 * @throws ParseException
+	 * @throws IOException
+	 * @throws FileNotFoundException
 	 */
-	public String[] getOtherPersonInformation(int index) {
-		String[] otherPersonInformation = new String[5];
-		if (index == personDetails.indexOf(person)) {
-			otherPersonInformation[0] = person.getAddress();
-			otherPersonInformation[1] = person.getCity();
-			otherPersonInformation[2] = person.getState();
-			otherPersonInformation[3] = person.getZip();
-			otherPersonInformation[4] = person.getPhone();
-		}
-		return otherPersonInformation;
+	public String[] getOtherPersonInformation(int index, String file)
+			throws FileNotFoundException, IOException, ParseException {
+		arrayList = pareseFile(file);
+		
+		JSONObject jsonObject = (JSONObject) arrayList.get(index);
+		String[] information = { (String) jsonObject.get("firstName"), (String) jsonObject.get("lastName"),
+				(String) jsonObject.get("address"), (String) jsonObject.get("city"), (String) jsonObject.get("state"),
+				(String) jsonObject.get("zip"), (String) jsonObject.get("phone") };
+
+		return information;
 	}
 
 	/**
@@ -131,56 +140,79 @@ public class AddressBook extends Observable implements Serializable {
 	 * @param state
 	 * @param zip
 	 * @param phone
+	 * @throws IOException
+	 * @throws JsonMappingException
+	 * @throws JsonGenerationException
+	 * @throws ParseException
 	 */
-	public void updatePerson(int index, String address, String city, String state, String zip, String phone) {
-		if (index == personDetails.indexOf(person)) {
-			person.update(address, city, state, zip, phone);
-		}
+	public void updatePerson(int index, String address, String city, String state, String zip, String phone,
+			String file) throws JsonGenerationException, JsonMappingException, IOException, ParseException {
+		arrayList = pareseFile(file);
+		File file1 = new File(file);
+
+		JSONObject jsonObject = (JSONObject) arrayList.get(index);
+		String firstName = (String) jsonObject.get("firstName");
+		String lastName = (String) jsonObject.get("lastName");
+		arrayList.remove(jsonObject);
+		person.update(address, city, state, zip, phone);
+		person = new Person(firstName, lastName, address, city, state, zip, phone);
+		arrayList.add(person);
+		mapper.writeValue(file1, arrayList);
+		arrayList = pareseFile(file);
+
 	}
 
 	/**
 	 * @param index
+	 * @throws ParseException
+	 * @throws IOException
+	 * @throws FileNotFoundException
 	 */
-	public void removePerson(int index) {
-		if (index == personDetails.indexOf(person)) {
-			personDetails.remove(index);
-		}
+	public void removePerson(int index, String file) throws FileNotFoundException, IOException, ParseException {
+		arrayList = pareseFile(file);
+		File file1 = new File(file);
 
+		JSONObject jsonObject = (JSONObject) arrayList.get(index);
+		arrayList.remove(jsonObject);
+		mapper.writeValue(file1, arrayList);
 	}
 
 	// Sort the collection by name
-	public void sortByName() {
-		for (int index = 0; index < personDetails.size(); index++) {
-			compareByName.compare(personDetails.get(index), personDetails.get(index + 1));
+	public void sortByName(String file) throws FileNotFoundException, IOException, ParseException {
+		 arrayList=pareseFile(file);
+		 File file1=new File(file);
+		 /*for (int i = 0; i < arrayList.size(); i++) {
+		 JSONObject person1=(JSONObject)arrayList.get(i);
+		 //person1.get("lastName");
+		 	arrayList.sort((Person.CompareByName)person1);
+		 }*/
+		 mapper.writeValue(file1, arrayList);
+		 for (int i = 0; i < arrayList.size()-1; i++) {
+			 for (int j = 0; j < arrayList.size()-i-1; j++) {
+				
+				JSONObject person1=(JSONObject)arrayList.get(j); 
+				JSONObject person2=(JSONObject)arrayList.get(j+1);
+				if(person1.compareTo(person2)<0) {
+					JSONObject temp=person1;
+					person1=person2;
+					person2=temp;
+				}
+			}
+			
+			
 		}
 	}
 
 	// Sort the collection by zip
 	public void sortByZip() {
-		for (int index = 0; index < personDetails.size(); index++) {
-			compareByName.compare(personDetails.get(index), personDetails.get(index + 1));
-		}
+		
 	}
 
 	// print the address of the person
-	public void printAll() throws FileNotFoundException, IOException, ParseException {
+	public void printAll(String file) throws FileNotFoundException, IOException, ParseException {
+		arrayList = pareseFile(file);
 
-		new AddressBook();
-		JSONParser parser = new JSONParser();
-		
-	}
-
-	public Person getWrite(Person person) throws JsonGenerationException, JsonMappingException, IOException {
-		
-		System.out.println("enter no. of persons list");
-		int noOfPerson = utility.userInputInteger();
-		for (int i = 0; i < noOfPerson; i++) {
-			//person = personData();
-			personDetails.add(person);
-		}
-		return person;
 	}
 
 	
-
 }
