@@ -1,6 +1,11 @@
+/**
+ * Purpose: implementation of address book problem
+ * @author SasiKala
+ * @version 1.0
+ * @since 08-06-2018
+ */
 package com.bridgelabz.oops;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.codehaus.jackson.JsonGenerationException;
@@ -15,63 +20,84 @@ public class AddressBookUser {
 			throws JsonGenerationException, JsonMappingException, IOException, ParseException {
 		AddressBookController controller = new AddressBookController();
 		Utility utility = new Utility();
-
-		System.out.println("1:create new json file");
-		System.out.println("2:Add a person");
-		System.out.println("3:Edit person details");
-		System.out.println("4:Delete a person");
-		System.out.println("5:Sort Entries by name");
-		System.out.println("6:Sort entries by zip");
-		System.out.println("7:print entries");
-		System.out.println("8:Exit");
+		System.out.println("1: CREATE THE NEW ADDRESSBOOK");
+		System.out.println("2: OPEN THE EXISTED ADDRESSBOOK");
+		System.out.println("3: VIEW THE ADDRESSBOOKS");
+		System.out.println("4: EDIT THE ADDRESSBOOK");
+		System.out.println("5: EXIT THE ADDRESSBOOK");
 		int choice = 0;
-		while (choice < 9) {
-			System.out.println("Enter your choice ");
+		while (choice < 6) {
+			System.out.println("enter your choice to do which operation");
 			choice = utility.userInputInteger();
 			switch (choice) {
 			case 1:
-				
-				controller.doNew();
-				
+					controller.doNew();
 				break;
 			case 2:
-				
-				controller.doAdd();
+				controller.doOpen();
 				break;
 			case 3:
-				System.out.println("Enter index to edit");
-				int index = utility.userInputInteger();
-				controller.doEdit(index);
+				controller.doView();
 				break;
 			case 4:
-				System.out.println("Enter index to delete");
-				int indexD = utility.userInputInteger();
-				
-				controller.doDelete(indexD);
+				System.out.println("Edit the information");
+				int input = 0;
+				System.out.println("1:add person address");
+				System.out.println("2:Edit person details");
+				System.out.println("3:Delete a person");
+				System.out.println("4:Sort Entries by name");
+				System.out.println("5:Sort entries by zip");
+				System.out.println("6:Get the information of particular person");
+				System.out.println("7:Get the person full name based on the index");
+                controller.doView();
+                String file=controller.findFile();
+				while (input < 8) {
+					System.out.println("enter your choice to do which operation");
+					input = utility.userInputInteger();
+					
+					switch (input) {
+					case 1: controller.doAdd( file);
+					break;
+					case 2:
+						System.out.println("Enter index to edit");
+						int index = utility.userInputInteger();
+						controller.doEdit(index,file);
+						break;
+					case 3:
+						System.out.println("Enter index to delete");
+						int indexD = utility.userInputInteger();
+						controller.doDelete(indexD,file);
+						break;
+					case 4:
+						System.out.println("Sort by name");
+						controller.doSortByName(file);
+						break;
+					case 5:
+						System.out.println("Sort by zip");
+						controller.doSortByZip(file);
+						break;
+					case 6:
+						System.out.println("enter index to get person information");
+						int indexp = utility.userInputInteger();
+						controller.doGet(indexp,file);
+						break;
+					case 7:
+						System.out.println("enter index to get person name");
+						int indexn = utility.userInputInteger();
+						controller.doGetPersonName(indexn,file);
+						break;
+					default:
+						System.out.println("wrong input");
+						break;
+					}
+					input++;
+				}
 				break;
 			case 5:
-				System.out.println("Sort by name");
-				controller.doSortByName();
+				System.out.println("Exit the address book");
 				break;
-			case 6:
-				System.out.println("Sort by zip");
-				controller.doSortByZip();
-				break;
-			case 7:
-				System.out.println("enter index to get person information");
-				int indexp=utility.userInputInteger();
-				controller.doGet(indexp);
-				break;
-			case 8:System.out.println("enter index to get person name");
-			int indexn=utility.userInputInteger();
-			controller.doGetPersonName(indexn);
-				
-			default: System.out.println("wrong input");
-			break;
 			}
 			choice++;
 		}
-
 	}
-
 }

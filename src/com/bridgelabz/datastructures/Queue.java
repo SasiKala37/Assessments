@@ -47,6 +47,17 @@ public class Queue<T extends Comparable<T>> {
 		count++;
 	}
 
+	public void enqueueS(String data) {
+		Node temp = new Node(data, null);
+		if (rear == null) {
+			front = temp;
+			rear = temp;
+		} else {
+			rear.next = temp;
+			rear = rear.next;
+		}
+		count++;
+	}
 	/**
 	 * Delete the Queue elements
 	 */

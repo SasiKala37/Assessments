@@ -55,9 +55,11 @@ public class Utility {
 	public boolean userInputBoolean() {
 		return scanner.nextBoolean();
 	}
+
 	public Long userInputLong() {
 		return scanner.nextLong();
 	}
+
 	/**
 	 * Replace with the String template
 	 * 
@@ -1231,14 +1233,13 @@ public class Utility {
 			@SuppressWarnings("resource")
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 			String line = "";
-			//String[] words=new words[20];
+			// String[] words=new words[20];
 			while ((line = bufferedReader.readLine()) != null) {
 				String[] words = line.split(",");
 				for (int i = 0; i < words.length; i++) {
 					linkedList.add(words[i]);
 				}
 			}
-			
 
 			System.out.println("File content:");
 			linkedList.traverse();
@@ -1248,10 +1249,10 @@ public class Utility {
 		}
 		System.out.println("Enter the search value");
 		String searchValue = userInputString();
-		
+
 		if (linkedList.search(searchValue)) {
 			linkedList.remove(searchValue);
-			//linkedList.traverse();
+			// linkedList.traverse();
 		} else {
 			linkedList.addLast(searchValue);
 
@@ -1376,7 +1377,7 @@ public class Utility {
 			int[] result = findPrime(low, high);
 			for (int j = 0; j < prime[i].length; j++) {
 				prime[i][j] = result[k++];
-				System.out.format("%4d",prime[i][j] );
+				System.out.format("%4d", prime[i][j]);
 
 				if (result[k] == 0) {
 					break;
@@ -1422,7 +1423,7 @@ public class Utility {
 				}
 
 			}
-			 //System.out.println();
+			// System.out.println();
 		}
 		/*
 		 * for (int i = 0; i < nonanagram.length; i++) { for (int j = 0; j <nonanagram
@@ -1777,6 +1778,17 @@ public class Utility {
 
 	}
 
+	/**
+	 * Replace with regex string
+	 * 
+	 * @param message
+	 *            Actual content of the hole string
+	 * @param regex
+	 *            is expression to replace
+	 * @param replacement
+	 *            string replaced at regex
+	 * @return message after replacement
+	 */
 	public static String regexReplace(String message, String regex, String replacement) {
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(message);
@@ -1786,62 +1798,84 @@ public class Utility {
 
 	}
 
-	//cards initialization
 	/**
+	 * cards initialization
+	 * 
 	 * @param deck
+	 *            deck of cards
 	 * @param SUIT
+	 *            suit cards
 	 * @param RANK
+	 *            rank cards
 	 * @return
 	 */
-	public static String[][] cardsIntialization(String[][] deck,String[] SUIT,String[] RANK)
-	{
-	    for(int i=0;i<SUIT.length;i++)
-	    {
-	        for(int j=0;j<RANK.length;j++)
-	        {
-	            deck[i][j]=SUIT[i]+" - " +RANK[j];
-	        }
-	    }
-	    return deck;
+	public static String[][] cardsIntialization(String[][] deck, String[] SUIT, String[] RANK) {
+		for (int i = 0; i < SUIT.length; i++) {
+			for (int j = 0; j < RANK.length; j++) {
+				deck[i][j] = SUIT[i] + " - " + RANK[j];
+			}
+		}
+		return deck;
 	}
-	//shuffling cards
+
 	/**
+	 * shuffling cards
+	 * 
 	 * @param deck
+	 *            deck of cards
 	 * @param suitsize
+	 *            size of the suit
 	 * @param ranksize
-	 * @return
+	 *            size of the rank
+	 * @return deck of cards after shuflling
 	 */
-	public static String[][] shufflingCards(String[][] deck,int suitsize,int ranksize)
-	{
-	    for(int i=0;i<suitsize;i++)
-	    {
-	        for(int j=0;j<ranksize;j++)
-	        {
-	       int random=(int)(Math.random()*suitsize);
-	       int random1=(int)(Math.random()*ranksize);
-	       String temp=deck[random][random1];
-	       deck[random][random1]=deck[i][j];
-	       deck[i][j]=temp;
-	        }
-	    }
-	    return deck;
+	public static String[][] shufflingCards(String[][] deck, int suitsize, int ranksize) {
+		for (int i = 0; i < suitsize; i++) {
+			for (int j = 0; j < ranksize; j++) {
+				int random = (int) (Math.random() * suitsize);
+				System.out.println("Ramdom suit"+random);
+				int random1 = (int) (Math.random() * ranksize);
+				System.out.println("Random rank"+random1);
+				String temp = deck[random][random1];
+				deck[random][random1] = deck[i][j];
+				deck[i][j] = temp;
+				System.out.println(deck[i][j]);
+			}
+		}
+		return deck;
 	}
-	//printing cards
+
+	//
 	/**
+	 * print cards
+	 * 
 	 * @param deck
+	 *            deck of cards to print
 	 */
-	public static void  printingcards(String[][] deck)
-	{
-	    for(int i=0;i<4;i++)
-	    {
-	        System.out.println("person "+ (i+1));
-	        for(int j=0;j<9;j++)
-	        {
-	            System.out.println(deck[i][j]+" ");
-	        }
-	        System.out.println();
-	    }
+	public static void printingcards(String[][] deck) {
+		for (int i = 0; i < 4; i++) {
+			System.out.println("person " + (i + 1));
+			for (int j = 0; j < 9; j++) {
+				System.out.println(deck[i][j] + " ");
+			}
+			System.out.println();
+		}
 	}
-   
-	
+
+	/**
+	 * Add to deck of cards to Queue
+	 * 
+	 * @param deck
+	 *            deck deck of cards to print
+	 */
+	public void addCardsToQ(String[][] deck) {
+		for (int i = 0; i < 4; i++) {
+			System.out.println("person " + (i + 1));
+			for (int j = 0; j < 9; j++) {
+				queue.enqueueS(deck[i][j]);
+			}
+		}
+		queue.display();
+	}
+
 }
