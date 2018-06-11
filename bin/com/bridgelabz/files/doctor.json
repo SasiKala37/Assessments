@@ -1,0 +1,9 @@
+[
+	{
+		"doctorName": "Dr. Subba Rao",
+		"doctorId": 123,
+		"availableTime": "Both",
+		"specialization": "Arnithology",
+		"countOfPatients": 3
+	}
+]
