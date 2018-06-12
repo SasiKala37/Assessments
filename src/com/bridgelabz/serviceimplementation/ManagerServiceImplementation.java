@@ -1,49 +1,66 @@
 package com.bridgelabz.serviceimplementation;
 
+import java.io.File;
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 
+import com.bridgelabz.model.Appointment;
 import com.bridgelabz.model.Doctor;
 import com.bridgelabz.model.Patient;
+import com.bridgelabz.service.ManagerService;
 import com.bridgelabz.util.Utility;
 
-public class ManagerServiceImplementation {
-	Doctor doctor = new Doctor();
-	Patient patient = new Patient();
+public class ManagerServiceImplementation implements ManagerService {
 	Utility utility = new Utility();
+	// DoctorServiceImplementation implementation = new
+	// DoctorServiceImplementation();
 	ArrayList<Doctor> doctorList = new ArrayList<>();
+	Doctor doctor = new Doctor();
+	// PatientServiceImplementation patientServiceImplementation=new
+	// PatientServiceImplementation();
+	Patient patient = new Patient();
 	ArrayList<Patient> patientList = new ArrayList<>();
-	DoctorServiceImplementation implementation = new DoctorServiceImplementation();
-	PatientServiceImplementation patientServiceImpl = new PatientServiceImplementation();
-	
 
-	/**
-	 * @throws JsonParseException
-	 * @throws JsonMappingException
-	 * @throws IOException
-	 */
-	public void addDocotor() throws JsonParseException, JsonMappingException, IOException {
+	Appointment appointment = new Appointment();
+	ArrayList<Appointment> appointmentList = new ArrayList<>();
 
-		doctorList = Utility.parseJSONArray(implementation.file, Doctor.class);
+	File appFile = new File(
+			"/home/bridgelabz/basicjavaprograms/cliniquemanagement/src/com/bridgelabz/files/appointment.json");
+	File doctorFile = new File(
+			"/home/bridgelabz/basicjavaprograms/cliniquemanagement/src/com/bridgelabz/files/doctor.json");
+	File patientFile = new File(
+			"/home/bridgelabz/basicjavaprograms/cliniquemanagement/src/com/bridgelabz/files/patient.json");
+
+	@Override
+	public void addDocotor() {
+		try {
+			doctorList = Utility.parseJSONArray(doctorFile, Doctor.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		doctor = utility.doctorDetails();
 		doctorList.add(doctor);
 
-		Utility.mapper.writeValue(implementation.file, doctorList);
+		try {
+			Utility.mapper.writeValue(doctorFile, doctorList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
-	/**
-	 * @param time
-	 * @throws JsonParseException
-	 * @throws JsonMappingException
-	 * @throws IOException
-	 */
-	public void updateDocotorDetails(int doctorId)
-			throws JsonParseException, JsonMappingException, IOException {
-		doctorList = Utility.parseJSONArray(implementation.file, Doctor.class);
+	@Override
+	public void updateDocotorDetails(int doctorId) {
+		try {
+			doctorList = Utility.parseJSONArray(doctorFile, Doctor.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		boolean search = false;
 		ArrayList<Doctor> findList = new ArrayList<>();
 		for (int i = 0; i < doctorList.size(); i++) {
@@ -59,17 +76,21 @@ public class ManagerServiceImplementation {
 				findList.get(i).setAvailableTime(time);
 			}
 		}
-		Utility.mapper.writeValue(implementation.file, doctorList);
+		try {
+			Utility.mapper.writeValue(doctorFile, doctorList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
-	/**
-	 * @param doctorId
-	 * @throws JsonGenerationException
-	 * @throws JsonMappingException
-	 * @throws IOException
-	 */
-	public void deleteDoctor(int doctorId) throws JsonGenerationException, JsonMappingException, IOException {
-		doctorList = Utility.parseJSONArray(implementation.file, Doctor.class);
+	@Override
+	public void deleteDoctor(int doctorId) {
+		try {
+			doctorList = Utility.parseJSONArray(doctorFile, Doctor.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		boolean search = false;
 		for (int i = 0; i < doctorList.size(); i++) {
 			if (doctorList.get(i).getDoctorId() == doctorId) {
@@ -78,7 +99,11 @@ public class ManagerServiceImplementation {
 			}
 		}
 		if (search) {
-			Utility.mapper.writeValue(implementation.file, doctorList);
+			try {
+				Utility.mapper.writeValue(doctorFile, doctorList);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			System.out.println("Doctor record deleted");
 		} else {
 			System.out.println("Doctor record not found to delete");
@@ -86,29 +111,31 @@ public class ManagerServiceImplementation {
 
 	}
 
-	/**
-	 * @throws JsonParseException
-	 * @throws JsonMappingException
-	 * @throws IOException
-	 */
-	public void addPatient() throws JsonParseException, JsonMappingException, IOException {
-		patientList = Utility.parseJSONArray(patientServiceImpl.file1, Patient.class);
+	@Override
+	public void addPatient() {
+		try {
+			patientList = Utility.parseJSONArray(patientFile, Patient.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		patient = utility.patientDetails();
 		patientList.add(patient);
 
-		Utility.mapper.writeValue(patientServiceImpl.file1, patientList);
+		try {
+			Utility.mapper.writeValue(patientFile, patientList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
-	/**
-	 * @param patientId
-	 * @param age
-	 * @throws JsonGenerationException
-	 * @throws JsonMappingException
-	 * @throws IOException
-	 */
-	public void updatePatientByAge(int patientId)
-			throws JsonGenerationException, JsonMappingException, IOException {
-		patientList = Utility.parseJSONArray(patientServiceImpl.file1, Patient.class);
+	@Override
+	public void updatePatientByAge(int patientId) {
+		try {
+			patientList = Utility.parseJSONArray(patientFile, Patient.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		boolean search = false;
 		ArrayList<Patient> findList = new ArrayList<>();
 		for (int i = 0; i < patientList.size(); i++) {
@@ -116,53 +143,53 @@ public class ManagerServiceImplementation {
 				findList.add(patientList.get(i));
 				search = true;
 			}
-		}	
+		}
 		if (search) {
 			System.out.println("Enter the age of patient");
-			int age=Utility.userInputInteger();
+			int age = Utility.userInputInteger();
 			for (int i = 0; i < findList.size(); i++) {
 				findList.get(i).setAge(age);
 			}
-		}
-		else {
+		} else {
 			System.out.println("Patient id not found");
 		}
-		Utility.mapper.writeValue(patientServiceImpl.file1, patientList);
-	}
-/**
- * @param patientId
- * @param mobileNum
- * @throws JsonGenerationException
- * @throws JsonMappingException
- * @throws IOException
- */
-public void updatePatientByMobileNum(int patientId) throws JsonGenerationException, JsonMappingException, IOException {
-	patientList = Utility.parseJSONArray(patientServiceImpl.file1, Patient.class);
-	boolean search = false;
-	ArrayList<Patient> findList = new ArrayList<>();
-	for (int i = 0; i < patientList.size(); i++) {
-		if (patientList.get(i).getPatientId() == patientId) {
-			findList.add(patientList.get(i));
-			search = true;
+		try {
+			Utility.mapper.writeValue(patientFile, patientList);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+
 	}
-	if (search) {
-		System.out.println("Enter the mobile number of patient");
-		long mobileNum=Utility.userInputLong();
-		for (int i = 0; i < findList.size(); i++) {
-			findList.get(i).setMobileNumber(mobileNum);
+
+	public void updatePatientByMobileNum(int patientId)
+			throws JsonGenerationException, JsonMappingException, IOException {
+		patientList = Utility.parseJSONArray(patientFile, Patient.class);
+		boolean search = false;
+		ArrayList<Patient> findList = new ArrayList<>();
+		for (int i = 0; i < patientList.size(); i++) {
+			if (patientList.get(i).getPatientId() == patientId) {
+				findList.add(patientList.get(i));
+				search = true;
+			}
 		}
+		if (search) {
+			System.out.println("Enter the mobile number of patient");
+			long mobileNum = Utility.userInputLong();
+			for (int i = 0; i < findList.size(); i++) {
+				findList.get(i).setMobileNumber(mobileNum);
+			}
+		}
+		Utility.mapper.writeValue(patientFile, patientList);
 	}
-	Utility.mapper.writeValue(patientServiceImpl.file1, patientList);
-}
-	/**
-	 * @param patientId
-	 * @throws JsonGenerationException
-	 * @throws JsonMappingException
-	 * @throws IOException
-	 */
-	public void deletePatient(int patientId) throws JsonGenerationException, JsonMappingException, IOException {
-		patientList = Utility.parseJSONArray(patientServiceImpl.file1, Patient.class);
+
+	@Override
+	public void deletePatient(int patientId) {
+
+		try {
+			patientList = Utility.parseJSONArray(patientFile, Patient.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		boolean search = false;
 		for (int i = 0; i < patientList.size(); i++) {
 			if (patientList.get(i).getPatientId() == patientId) {
@@ -171,11 +198,86 @@ public void updatePatientByMobileNum(int patientId) throws JsonGenerationExcepti
 			}
 		}
 		if (search) {
-			Utility.mapper.writeValue(patientServiceImpl.file1, patientList);
+			try {
+				Utility.mapper.writeValue(patientFile, patientList);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			System.out.println("Patient record deleted");
 		} else {
 			System.out.println("Patient record not found to delete");
 		}
 
+	}
+
+	public void addAppointement(int index) throws JsonParseException, JsonMappingException, IOException {
+		appointmentList = Utility.parseJSONArray(appFile, Appointment.class);
+
+		for (int i = 0; i < doctorList.size(); i++) {
+			if (i == index) {
+				appointment.setDoctorName(doctorList.get(index).getDoctorName());
+				appointment.setDoctorId(doctorList.get(index).getDoctorId());
+			}
+		}
+
+		System.out.println("Enter patient Name");
+		Utility.userInputNextLine();
+		String patientName = Utility.userInputNextLine();
+		appointment.setPatientName(patientName);
+		System.out.println("Enter Patient Id");
+		int patientId = Utility.userInputInteger();
+		appointment.setPatientId(patientId);
+		appointment.setTimeStamp(appointment.getTimeStamp());
+
+		appointmentList.add(appointment);
+
+		Utility.mapper.writeValue(appFile, appointmentList);
+	}
+
+	public void fixAppontement( String fixedDoctor)
+			throws JsonParseException, JsonMappingException, IOException {
+
+		int count;
+		int index = 0;
+		doctorList = Utility.parseJSONArray(doctorFile, Doctor.class);
+
+		
+			for (int i = 0; i < doctorList.size(); i++) {
+				if (doctorList.get(i).getDoctorName().equalsIgnoreCase(fixedDoctor)) {
+					index = i;
+					break;
+				}
+			}
+			count=doctorList.get(index).getCountOfPatients();
+			if(count<=5) {
+				addPatient();
+				addAppointement(index);
+				count=count+1;
+				doctorList.get(index).setCountOfPatients(count);
+				Utility.mapper.writeValue(doctorFile, doctorList);
+			}
+			/*ArrayList<Doctor> tempList=doctorList;
+			if(count==5) {
+				tempList.remove(index);
+				Utility.mapper.writeValue(doctorFile, tempList);
+			}*/
+			else {
+				System.out.println("Search for someother doctor");
+			}
+		}
+	public void printReport() {
+		try {
+			appointmentList = Utility.parseJSONArray(appFile, Appointment.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		for (Appointment list:appointmentList) {
+			try {
+				System.out.println(Utility.mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }

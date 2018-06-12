@@ -6,9 +6,9 @@ import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 
 public interface DoctorSrevice {
-	public void showDoctorDetails() throws JsonParseException, JsonMappingException, IOException;
+	public void showDoctorDetails();
 
-	public void searchByDoctorName(String docotorName);
+	public boolean searchByDoctorName(String docotorName);
 
 	public void searchByDoctorId(int doctorId);
 

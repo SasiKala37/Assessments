@@ -1,15 +1,20 @@
 package com.bridgelabz.service;
 
+import java.io.IOException;
+
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+
 public interface PatientService {
-	public boolean takeAppointment();
+	public void takeAppointment();
 
 	public void showPatientDetails();
 
 	public void searchPatientByName(String patientName);
 
-	public void searchPatientByPatientId(String patientId);
+	public void searchPatientById(int patientId);
 
-	public void searchPatientMobileNumber(long mobileNumber);
+	public void searchPatientByMobileNumber(long mobileNumber);
 
 	public void showPopularDoctor();
 }

@@ -1,14 +1,1 @@
-[
-	{
-		"patientName": "jaya",
-		"patientId": 876,
-		"mobileNumber": 4567892310,
-		"age": 35
-	},
-	{
-		"patientName": "haritha",
-		"patientId": 654,
-		"mobileNumber": 12345678908,
-		"age": 23
-	}
-]
+[{"patientName":"jaya","patientId":876,"mobileNumber":4567892310,"age":35},{"patientName":"haritha","patientId":654,"mobileNumber":12345678908,"age":23},{"patientName":"sashi","patientId":345,"mobileNumber":23456,"age":22},{"patientName":"sai","patientId":345,"mobileNumber":1232123,"age":22},{"patientName":"as","patientId":12,"mobileNumber":34556,"age":23},{"patientName":"swetha","patientId":345,"mobileNumber":678543,"age":23},{"patientName":"david","patientId":342,"mobileNumber":5643213,"age":76},{"patientName":"drona","patientId":987,"mobileNumber":67895432,"age":89}]

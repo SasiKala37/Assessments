@@ -12,40 +12,50 @@ import com.bridgelabz.model.Doctor;
 import com.bridgelabz.service.DoctorSrevice;
 import com.bridgelabz.util.Utility;
 
-public class DoctorServiceImplementation implements DoctorSrevice, Serializable {
+public class DoctorServiceImplementation implements DoctorSrevice {
 	public ArrayList<Doctor> doctorList = new ArrayList<>();
 	Utility utility = new Utility();
 	File file = new File("/home/bridgelabz/basicjavaprograms/cliniquemanagement/src/com/bridgelabz/files/doctor.json");
 
-	public void showDoctorDetails() throws JsonParseException, JsonMappingException, IOException {
+	public void showDoctorDetails()  {
 
-		doctorList = Utility.parseJSONArray(file, Doctor.class);
+		try {
+			doctorList = Utility.parseJSONArray(file, Doctor.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		for (int i = 0; i < doctorList.size(); i++) {
 
-			System.out.println(Utility.mapper.writerWithDefaultPrettyPrinter().writeValueAsString(doctorList.get(i).toString()));
+			try {
+				System.out.println(Utility.mapper.writerWithDefaultPrettyPrinter().writeValueAsString(doctorList.get(i).toString()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
-	public void searchByDoctorName(String doctorName) {
+	public boolean searchByDoctorName(String doctorName) {
 		try {
 			doctorList = Utility.parseJSONArray(file, Doctor.class);
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		boolean search = false;
+		boolean search=false;
+		
 		for (int i = 0; i < doctorList.size(); i++) {
 			if (doctorList.get(i).getDoctorName().equalsIgnoreCase(doctorName)) {
 				System.out.println("Doctor available ");
-				search = true;
+				search=true;
+				break;
 			}
 		}
 		if (!search) {
 			System.out.println("Doctor not Available");
+			return search;
 		}
-
+		return search;
 	}
 
 	public void searchByDoctorId(int doctorId) {

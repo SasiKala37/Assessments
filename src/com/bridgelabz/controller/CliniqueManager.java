@@ -17,24 +17,30 @@ public class CliniqueManager {
 		PatientServiceImplementation patientServiceImplementation = new PatientServiceImplementation();
 		DoctorServiceImplementation doctorServiceImplementation = new DoctorServiceImplementation();
 		ManagerServiceImplementation managerServiceImplementation = new ManagerServiceImplementation();
+		/*
+		 * managerServiceImplementation.printReport();
+		 * patientServiceImplementation.takeAppointment();
+		 * patientServiceImplementation.showPopularDoctor();
+		 */
 		System.out.println("WELCOME TO AADHRSHA CLINIQUE");
-		System.out.println("1: Add Doctor Details");
-		System.out.println("2:Show Doctor Details");
-		System.out.println("3:Take Appointment");
-		System.out.println("4:Add Patient Details");
-		System.out.println("5:Show Patient Details");
-		System.out.println("THANK YOU FOR VISITING THE CLINIQUE");
-
+		System.out.println("1: Show Popular Doctor");
+		System.out.println("2:Take Appointment");
+		System.out.println("3:Doctor Details ");
+		System.out.println("4:Patient Details");
+		System.out.println("5:Print Report");
 		while (choice < 10) {
 			System.out.println("Enter your choice");
 			choice = Utility.userInputInteger();
 			switch (choice) {
 			case 1:
-				doctorServiceImplementation.showDoctorDetails();
-
+				System.out.println("Show popular Doctor");
+				patientServiceImplementation.showPopularDoctor();
 				break;
-
 			case 2:
+				System.out.println("Take Appointment");
+				patientServiceImplementation.takeAppointment();
+				break;
+			case 3:
 				System.out.println("Doctor Details Modifications");
 				System.out.println("1:Add Doctor Details");
 				System.out.println("2:Update Doctor Details");
@@ -64,6 +70,7 @@ public class CliniqueManager {
 						System.out.println("Enter doctor Id");
 						int did1 = Utility.userInputInteger();
 						doctorServiceImplementation.searchByDoctorId(did1);
+						break;
 					case 5:
 						System.out.println("Enter the doctor name");
 						Utility.userInputNextLine();
@@ -77,8 +84,8 @@ public class CliniqueManager {
 					}
 					dop++;
 				}
-				
-			case 3:
+
+			case 4:
 				System.out.println("Patient Details");
 				System.out.println("1:Show Patient Details");
 				System.out.println("2:SEARCH PATIENT BY NAME");
@@ -137,9 +144,12 @@ public class CliniqueManager {
 					ch++;
 				}
 				break;
-
+			case 5:
+				System.out.println("Print report");
+				 managerServiceImplementation.printReport();
+				break;
 			default:
-				System.out.println("sssssssss");
+				System.out.println("Exit");
 			}
 			choice++;
 		}

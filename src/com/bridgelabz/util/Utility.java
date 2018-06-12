@@ -12,6 +12,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.type.CollectionType;
 
+import com.bridgelabz.model.Appointment;
 import com.bridgelabz.model.Doctor;
 import com.bridgelabz.model.Patient;
 import com.bridgelabz.serviceimplementation.DoctorServiceImplementation;
@@ -84,7 +85,9 @@ public class Utility {
 	  patient=new Patient(name,id,mobile,age);
 	  return patient;
    }
-    
+    /*public Appointment appointmentDetails() {
+    	System.out.println("Enter the Patient Name");
+    }*/
    /*public <T> void search(ArrayList<T> list,T doctorName) {
 	   
 	   boolean search = false;

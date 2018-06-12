@@ -1,11 +1,16 @@
 package com.bridgelabz.model;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+
 public class Appointment {
-	private String patientName;
-	private int patientId;
 	private String doctorName;
 	private int doctorId;
+	private String patientName;
+	private int patientId;
 	private String timeStamp;
+	 private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+	 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 	public Appointment() {
 		
 	}
@@ -51,7 +56,7 @@ public class Appointment {
 	}
 
 	public String getTimeStamp() {
-		return timeStamp;
+		return sdf.format(timestamp);
 	}
 
 	public void setTimeStamp(String timeStamp) {
