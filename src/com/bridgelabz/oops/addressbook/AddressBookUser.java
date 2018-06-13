@@ -4,7 +4,7 @@
  * @version 1.0
  * @since 08-06-2018
  */
-package com.bridgelabz.oops;
+package com.bridgelabz.oops.addressbook;
 
 import java.io.IOException;
 

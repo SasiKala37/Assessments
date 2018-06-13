@@ -1,3 +1,11 @@
+/** 
+ * Purpose:To check the palidrome of a string using Dqueue
+ * 
+ * @author SasiKala
+ * @version 1.0
+ * @since -05-2018
+ * 
+ */
 package com.bridgelabz.datastructures;
 
 import com.bridgelabz.utility.Utility;

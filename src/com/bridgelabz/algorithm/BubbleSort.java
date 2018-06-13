@@ -1,3 +1,9 @@
+/**
+ * Purpose: Sort the array of elements using bubble sort
+ * @author SasiKala
+ * @version 1.0
+ * @since -05-2018
+ */
 package com.bridgelabz.algorithm;
 
 import com.bridgelabz.utility.Utility;

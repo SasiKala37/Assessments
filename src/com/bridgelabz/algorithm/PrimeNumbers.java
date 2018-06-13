@@ -1,3 +1,10 @@
+/**
+ * Purpose: To print a the Prime numbers in the range of 0 - 1000 Numbers  
+ * @author SasiKala
+ * @version 1.0
+ * @since -05-2018
+ */
+
 package com.bridgelabz.algorithm;
 
 import com.bridgelabz.utility.Utility;

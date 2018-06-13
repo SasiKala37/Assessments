@@ -1,3 +1,9 @@
+/**
+ * Purpose: Find the Fewest Notes to be returned for Vending Machine
+ * @author SasiKala
+ * @version 1.0
+ * @since -05-2018
+ */
 package com.bridgelabz.algorithm;
 
 import com.bridgelabz.utility.Utility;

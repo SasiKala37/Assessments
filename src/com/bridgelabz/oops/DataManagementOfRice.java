@@ -1,3 +1,13 @@
+/**
+ * Purpose: To Create InventoryManager to manage the Inventory. The Inventory Manager will use 
+ * InventoryFactory to create Inventory Object from JSON. The InventoryManager will call each
+ * Inventory Object in its list to calculate the Inventory Price and then call the Inventory Object
+ * to return the JSON String. 
+ * 
+ * @author SasiKala
+ * @version 1.0
+ * @since 08-06-2018
+ */
 package com.bridgelabz.oops;
 
 import java.io.File;

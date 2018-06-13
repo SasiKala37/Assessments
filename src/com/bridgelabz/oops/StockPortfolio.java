@@ -1,3 +1,9 @@
+/**
+ * Purpose:Stock portfolio to store data in ArrayList
+ * @author SasiKala
+ * @version 1.0
+ * @since -06-2018
+ */
 package com.bridgelabz.oops;
 
 import java.util.ArrayList;

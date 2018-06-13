@@ -1,3 +1,9 @@
+/**
+ * Purpose:  POJO class for the stock account management
+ * @author SasiKala
+ * @version 1.0
+ * @since -06-2018
+ */
 package com.bridgelabz.oops;
 
 public class PoJoStockAccount {

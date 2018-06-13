@@ -1,3 +1,9 @@
+/**
+ * Purpose: Search the data in array using binary search technique
+ * @author SasiKala
+ * @version 1.0
+ * @since -05-2018
+ */
 package com.bridgelabz.algorithm;
 
 import com.bridgelabz.utility.Utility;

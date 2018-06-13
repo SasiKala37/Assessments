@@ -1,3 +1,10 @@
+/**
+ * Purpose:Write a program to read in Stock Names, Number of Share, Share Price. 
+ * Print a Stock Report with total value of each Stock and the total value of Stock.
+ * @author SasiKala
+ * @version 1.0
+ * @since -06-2018
+ */
 package com.bridgelabz.oops;
 
 import java.io.File;
@@ -23,26 +30,26 @@ public class Stock {
 		StockPortfolio folio = new StockPortfolio();
 		ObjectMapper map = new ObjectMapper();
 		Utility utility = new Utility();
-		
+
 		System.out.println("enter no. of stocks list");
 		int noOfStock = utility.userInputInteger();
 		PojoStock stock = new PojoStock();
-		
+
 		for (int i = 0; i < noOfStock; i++) {
 			stock = stockData();
 			folio.getstockList().add(stock);
 		}
-		
+
 		map.writeValue(new File("/home/bridgelabz/Documents/json/stock.json"), folio);
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(new FileReader("/home/bridgelabz/Documents/json/stock.json"));
 		JSONObject jsonobject = (JSONObject) obj;
 		JSONArray stock1 = (JSONArray) jsonobject.get("stockList");
-		
+
 		for (int i = 0; i < stock1.size(); i++) {
 			JSONObject objstock = (JSONObject) (stock1.get(i));
-			SUMSTOCK +=(long) objstock.get("numberOfStocks")* (long)objstock.get("sharePrice");
-			TOTALSTOCK +=(long) objstock.get("numberOfStocks");
+			SUMSTOCK += (long) objstock.get("numberOfStocks") * (long) objstock.get("sharePrice");
+			TOTALSTOCK += (long) objstock.get("numberOfStocks");
 		}
 		System.out.println(SUMSTOCK);
 		System.out.println(TOTALSTOCK);

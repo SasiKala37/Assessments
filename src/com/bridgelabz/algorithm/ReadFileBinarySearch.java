@@ -1,3 +1,9 @@
+/**
+ * Purpose: To find the Word from Word List using Binary Search 
+ * @author SasiKala
+ * @version 1.0
+ * @since -05-2018
+ */
 package com.bridgelabz.algorithm;
 
 import java.io.IOException;

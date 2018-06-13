@@ -1,3 +1,11 @@
+/** 
+ * Purpose:Implementation of ordered linked list
+ * 
+ * @author SasiKala
+ * @version 1.0
+ * @since -05-2018
+ * 
+ */
 package com.bridgelabz.datastructures;
 
 public class SortedLinkedList<T extends Comparable<T>> {

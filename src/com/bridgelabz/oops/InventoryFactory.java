@@ -1,3 +1,10 @@
+/**
+ * Purpose: factory class for the inventory management
+ * @author SasiKala
+ * @version 1.0
+ * @since 08-06-2018
+ */
+
 package com.bridgelabz.oops;
 
 import java.util.ArrayList;

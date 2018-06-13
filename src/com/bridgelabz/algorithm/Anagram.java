@@ -1,3 +1,9 @@
+/**
+ * Purpose: check whether the two strings are anagram or not
+ * @author SasiKala
+ * @version 1.0
+ * @since -05-2018
+ */
 package com.bridgelabz.algorithm;
 
 import java.util.Scanner;

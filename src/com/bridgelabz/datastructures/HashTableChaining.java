@@ -1,3 +1,11 @@
+/** 
+ * Purpose:Implementation of hash table using linked list
+ * 
+ * @author SasiKala
+ * @version 1.0
+ * @since -05-2018
+ * 
+ */
 package com.bridgelabz.datastructures;
 
 public class HashTableChaining {

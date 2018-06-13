@@ -2,7 +2,7 @@
  * Purpose: manage the AddressBook and AddressBook user
  * 
  */
-package com.bridgelabz.oops;
+package com.bridgelabz.oops.addressbook;
 
 import java.io.File;
 import java.io.FileNotFoundException;

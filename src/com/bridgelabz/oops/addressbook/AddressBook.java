@@ -1,4 +1,4 @@
-package com.bridgelabz.oops;
+package com.bridgelabz.oops.addressbook;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -76,14 +76,13 @@ public class AddressBook extends Observable implements Serializable {
 	 * Parse the file into json file
 	 * 
 	 * @param fileName
-	 * @return 
 	 * @return persons list of information
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 * @throws ParseException
 	 */
 	@SuppressWarnings("unchecked")
-	public  ArrayList<Object> pareseFile(String fileName) throws FileNotFoundException, IOException, ParseException {
+	public ArrayList<Object> pareseFile(String fileName) throws FileNotFoundException, IOException, ParseException {
 		JSONParser parser = new JSONParser();
 		Object object = parser.parse(new FileReader(new File(fileName)));
 		JSONArray array = (JSONArray) object;
@@ -91,7 +90,7 @@ public class AddressBook extends Observable implements Serializable {
 		for (int i = 0; i < array.size(); i++) {
 			JSONObject obj = (JSONObject) array.get(i);
 			arrayList.add(obj);
-		}                                    
+		}
 
 		return arrayList;
 	}

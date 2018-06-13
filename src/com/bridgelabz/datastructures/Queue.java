@@ -1,3 +1,11 @@
+/** 
+ * Purpose:Implementation of Queue using linked list
+ * 
+ * @author SasiKala
+ * @version 1.0
+ * @since -05-2018
+ * 
+ */
 package com.bridgelabz.datastructures;
 
 public class Queue<T extends Comparable<T>> {
@@ -48,7 +56,7 @@ public class Queue<T extends Comparable<T>> {
 	}
 
 	public void enqueueS(String data) {
-		Node temp = new Node(data, null);
+		Node<T> temp = new Node(data, null);
 		if (rear == null) {
 			front = temp;
 			rear = temp;

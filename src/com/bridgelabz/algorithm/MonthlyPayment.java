@@ -1,3 +1,10 @@
+/**
+ * Purpose: Calculate the monthly payment of the person's
+ * @author SasiKala
+ * @version 1.0
+ * @since -05-2018
+ */
+
 package com.bridgelabz.algorithm;
 
 import com.bridgelabz.utility.Utility;
