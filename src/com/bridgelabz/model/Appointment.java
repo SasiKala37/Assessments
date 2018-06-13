@@ -1,3 +1,10 @@
+/**
+ * Purpose:Appointment Pojo class for the Stock management
+ * @author SasiKala
+ * @version 1.0
+ * @since 9-06-2018
+ * 
+ * */
 package com.bridgelabz.model;
 
 import java.sql.Timestamp;

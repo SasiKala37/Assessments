@@ -1,3 +1,11 @@
+/**
+ * Purpose:Doctor PoJo class for Clinic Management 
+ * 
+ * @author SasiKala
+ * @version 1.0
+ * @since 9-06-2018
+ * 
+ * */
 package com.bridgelabz.model;
 
 public class Doctor {
@@ -6,15 +14,17 @@ public class Doctor {
 	private String availableTime;
 	private String specialization;
 	private int countOfPatients;
+
 	public Doctor() {
-		
+
 	}
-	public Doctor(String doctorName, int doctorId, String availableTime, String specialization,int countOfPatients) {
+
+	public Doctor(String doctorName, int doctorId, String availableTime, String specialization, int countOfPatients) {
 		this.doctorName = doctorName;
 		this.doctorId = doctorId;
 		this.availableTime = availableTime;
 		this.specialization = specialization;
-		this.countOfPatients=countOfPatients;
+		this.countOfPatients = countOfPatients;
 	}
 
 	public String getDoctorName() {
@@ -56,8 +66,9 @@ public class Doctor {
 	public void setSpecialization(String specialization) {
 		this.specialization = specialization;
 	}
+
 	public String toString() {
-		return doctorName+" "+doctorId+" "+availableTime+" "+specialization+" "+countOfPatients;
+		return doctorName + " " + doctorId + " " + availableTime + " " + specialization + " " + countOfPatients;
 	}
 
 }

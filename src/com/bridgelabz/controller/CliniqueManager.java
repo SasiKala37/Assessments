@@ -1,3 +1,10 @@
+/**
+ * Purpose:To check the functionality of clinic management to fix the doctor appointment
+ * @author SasiKala
+ * @version 1.0
+ * @since 9-06-2018
+ * 
+ * */
 package com.bridgelabz.controller;
 
 import java.io.IOException;
@@ -17,11 +24,7 @@ public class CliniqueManager {
 		PatientServiceImplementation patientServiceImplementation = new PatientServiceImplementation();
 		DoctorServiceImplementation doctorServiceImplementation = new DoctorServiceImplementation();
 		ManagerServiceImplementation managerServiceImplementation = new ManagerServiceImplementation();
-		/*
-		 * managerServiceImplementation.printReport();
-		 * patientServiceImplementation.takeAppointment();
-		 * patientServiceImplementation.showPopularDoctor();
-		 */
+		
 		System.out.println("WELCOME TO AADHRSHA CLINIQUE");
 		System.out.println("1: Show Popular Doctor");
 		System.out.println("2:Take Appointment");

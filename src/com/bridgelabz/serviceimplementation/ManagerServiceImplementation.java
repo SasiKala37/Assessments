@@ -1,3 +1,11 @@
+/**
+ * Purpose:Implementation class for the ManagerService Interface
+ * 
+ * @author SasiKala
+ * @version 1.0
+ * @since 9-06-2018
+ * 
+ * */
 package com.bridgelabz.serviceimplementation;
 
 import java.io.File;
@@ -17,12 +25,10 @@ import com.bridgelabz.util.Utility;
 
 public class ManagerServiceImplementation implements ManagerService {
 	Utility utility = new Utility();
-	// DoctorServiceImplementation implementation = new
-	// DoctorServiceImplementation();
+	
 	ArrayList<Doctor> doctorList = new ArrayList<>();
 	Doctor doctor = new Doctor();
-	// PatientServiceImplementation patientServiceImplementation=new
-	// PatientServiceImplementation();
+	
 	Patient patient = new Patient();
 	ArrayList<Patient> patientList = new ArrayList<>();
 
@@ -256,11 +262,7 @@ public class ManagerServiceImplementation implements ManagerService {
 				doctorList.get(index).setCountOfPatients(count);
 				Utility.mapper.writeValue(doctorFile, doctorList);
 			}
-			/*ArrayList<Doctor> tempList=doctorList;
-			if(count==5) {
-				tempList.remove(index);
-				Utility.mapper.writeValue(doctorFile, tempList);
-			}*/
+			
 			else {
 				System.out.println("Search for someother doctor");
 			}

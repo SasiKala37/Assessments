@@ -4,20 +4,20 @@
 		"doctorId": 123,
 		"availableTime": "Both",
 		"specialization": "Arnithology",
-		"countOfPatients": 3
-	},
-	{
-		"doctorName": "Dr. mamta Rao",
-		"doctorId": 423,
-		"availableTime": "AM",
-		"specialization": "Sleeping",
-		"countOfPatients": 3
+		"countOfPatients": 5
 	},
 	{
 		"doctorName": "Dr.Shruthi",
 		"doctorId": 423,
 		"availableTime": "PM",
 		"specialization": "Mental",
-		"countOfPatients": 0
+		"countOfPatients": 4
+	},
+	{
+		"doctorName": "Dr.Mamta",
+		"doctorId": 879,
+		"availableTime": "AM",
+		"specialization": "cardiology",
+		"countOfPatients": 2
 	}
 ]

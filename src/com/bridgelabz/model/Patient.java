@@ -1,3 +1,10 @@
+/**
+ * Purpose:Patient PoJo class for the clinic Management
+ * @author SasiKala
+ * @version 1.0
+ * @since 9-06-2018
+ * 
+ * */
 package com.bridgelabz.model;
 
 public class Patient {
@@ -5,16 +12,17 @@ public class Patient {
 	private String patientName;
 	private int patientId;
 	private long mobileNumber;
-	private int age; 
-	
+	private int age;
+
 	public Patient() {
-		
+
 	}
-	public Patient(String patientName, int patientId, long mobileNumber,int age) { 
+
+	public Patient(String patientName, int patientId, long mobileNumber, int age) {
 		this.patientName = patientName;
 		this.patientId = patientId;
 		this.mobileNumber = mobileNumber;
-		this.age=age;
+		this.age = age;
 	}
 
 	public String getPatientName() {
@@ -48,8 +56,9 @@ public class Patient {
 	public void setMobileNumber(long mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
+
 	public String toString() {
-		return patientName+" "+patientId+" "+mobileNumber+" "+age;
+		return patientName + " " + patientId + " " + mobileNumber + " " + age;
 	}
 
 }

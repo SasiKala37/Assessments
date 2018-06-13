@@ -25,33 +25,31 @@ public class PatientServiceImplementation implements PatientService, Serializabl
 	@Override
 	public void takeAppointment() {
 		doctorServiceImplementation.showDoctorDetails();
-		System.out.println("Search Doctor by name, id or specialization");
-		int choice = 0;
+		System.out.println("Search Doctor by name");
+		/*int choice = 0;
 		while (choice < 4) {
 			System.out.println("Enter your choice");
 			choice = Utility.userInputInteger();
 			switch (choice) {
-			case 1:
-				System.out.println("Enter the doctor name");
+			*/
+				System.out.println("Enter qthe doctor name");
 				Utility.userInputNextLine();
 				String fixedDoctor = Utility.userInputNextLine();
 				boolean avail = doctorServiceImplementation.searchByDoctorName(fixedDoctor);
 				System.out.println("index" + avail);
 				if (avail) {
-					System.out.println("do you want to take appointment? type yes");
-					String appointment = Utility.userInputString();
-					if (appointment.equalsIgnoreCase("yes")) {
+					
 						try {
 							managerServiceImpl.fixAppontement(fixedDoctor);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
 					} else {
-						System.out.println("enterd wrong tray again!!!!");
+						System.out.println("Doctor is not available!!!!");
 					}
 				}
 
-				break;
+				/*break;
 			case 2:
 				System.out.println("Enter doctor Id");
 				int did1 = Utility.userInputInteger();
@@ -64,7 +62,7 @@ public class PatientServiceImplementation implements PatientService, Serializabl
 				break;
 			}
 			choice++;
-		}
+		}*/
 
 	}
 
