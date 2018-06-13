@@ -1,0 +1,17 @@
+[
+	{
+		"stockName": "EMC",
+		"noOfShares": 5,
+		"price": 2000,
+		"typeOfTransaction": "buy",
+		"dateTime": "2018.06.12.17.16.00"
+	},
+	
+	{
+		"stockName": "Tata Sky",
+		"noOfShares": 1,
+		"price": 2000,
+		"typeOfTransaction": "Buy",
+		"dateTime": "2018.06.13.12.23.27"
+	}
+]

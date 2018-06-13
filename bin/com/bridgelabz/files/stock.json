@@ -1,0 +1,12 @@
+[
+	{
+		"stockName": "Tata Sky",
+		"noOfShares": 5,
+		"price": 2000.0
+	},
+	{
+		"stockName": "Tata Steel",
+		"noOfShares": 20,
+		"price": 6000.0
+	}
+]
