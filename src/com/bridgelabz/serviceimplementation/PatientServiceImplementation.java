@@ -1,3 +1,11 @@
+/**
+ * Purpose:Implementation class for the PatientService Interface
+ * 
+ * @author SasiKala
+ * @version 1.0
+ * @since 9-06-2018
+ * 
+ * */
 package com.bridgelabz.serviceimplementation;
 
 import java.io.File;
@@ -6,12 +14,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
-
 import com.bridgelabz.model.Doctor;
 import com.bridgelabz.model.Patient;
-import com.bridgelabz.service.ManagerService;
 import com.bridgelabz.service.PatientService;
 import com.bridgelabz.util.Utility;
 
@@ -25,44 +29,24 @@ public class PatientServiceImplementation implements PatientService, Serializabl
 	@Override
 	public void takeAppointment() {
 		doctorServiceImplementation.showDoctorDetails();
-		System.out.println("Search Doctor by name");
-		/*int choice = 0;
-		while (choice < 4) {
-			System.out.println("Enter your choice");
-			choice = Utility.userInputInteger();
-			switch (choice) {
-			*/
-				System.out.println("Enter qthe doctor name");
-				Utility.userInputNextLine();
-				String fixedDoctor = Utility.userInputNextLine();
-				boolean avail = doctorServiceImplementation.searchByDoctorName(fixedDoctor);
-				System.out.println("index" + avail);
-				if (avail) {
-					
-						try {
-							managerServiceImpl.fixAppontement(fixedDoctor);
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					} else {
-						System.out.println("Doctor is not available!!!!");
-					}
-				}
+		System.out.println("Search Doctor by name\n");
+		
+		System.out.println("Enter the doctor name");
+		Utility.userInputNextLine();
+		String fixedDoctor = Utility.userInputNextLine();
+		boolean avail = doctorServiceImplementation.searchByDoctorName(fixedDoctor);
+		// System.out.println("index" + avail);
+		if (avail) {
 
-				/*break;
-			case 2:
-				System.out.println("Enter doctor Id");
-				int did1 = Utility.userInputInteger();
-				doctorServiceImplementation.searchByDoctorId(did1);
-				break;
-			case 3:
-				System.out.println("Enter Doctor Specialization");
-				String spcl = Utility.userInputString();
-				doctorServiceImplementation.searchBySpecialization(spcl);
-				break;
+			try {
+				managerServiceImpl.fixAppontement(fixedDoctor);
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-			choice++;
-		}*/
+		} else {
+			System.out.println("Doctor is not available!!!!");
+		}
+		doctorServiceImplementation.showDoctorDetails();
 
 	}
 
@@ -157,24 +141,24 @@ public class PatientServiceImplementation implements PatientService, Serializabl
 
 	@Override
 	public void showPopularDoctor() {
-		ArrayList<Integer> countPatients=new ArrayList<>();
-		 try {
-			managerServiceImpl.doctorList=Utility.parseJSONArray(managerServiceImpl.doctorFile, Doctor.class);
+		ArrayList<Integer> countPatients = new ArrayList<>();
+		try {
+			managerServiceImpl.doctorList = Utility.parseJSONArray(managerServiceImpl.doctorFile, Doctor.class);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		 for (int i = 0; i <managerServiceImpl.doctorList.size() ; i++) {
-			 int count=managerServiceImpl.doctorList.get(i).getCountOfPatients();
+		for (int i = 0; i < managerServiceImpl.doctorList.size(); i++) {
+			int count = managerServiceImpl.doctorList.get(i).getCountOfPatients();
 			countPatients.add(count);
 		}
-		 System.out.println("Popular doctor: "+Collections.max(countPatients));
-		 for (int i = 0; i < managerServiceImpl.doctorList.size(); i++) {
-			if(managerServiceImpl.doctorList.get(i).getCountOfPatients()==Collections.max(countPatients)) {
-				String popular=managerServiceImpl.doctorList.get(i).getDoctorName();
-				System.out.println("Popular doctor:"+popular);
+		System.out.println("Popular doctor: " + Collections.max(countPatients));
+		for (int i = 0; i < managerServiceImpl.doctorList.size(); i++) {
+			if (managerServiceImpl.doctorList.get(i).getCountOfPatients() == Collections.max(countPatients)) {
+				String popular = managerServiceImpl.doctorList.get(i).getDoctorName();
+				System.out.println("Popular doctor:" + popular);
 			}
 		}
-		 
+
 	}
 
 }

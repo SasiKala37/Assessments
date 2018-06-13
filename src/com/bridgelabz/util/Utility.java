@@ -1,8 +1,15 @@
+/**
+ * Purpose:implement Static methods that are used repeatedly
+ * 
+ * @author SasiKala
+ * @version 1.0
+ * @since 9-06-2018
+ * 
+ * */
 package com.bridgelabz.util;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,10 +19,8 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.type.CollectionType;
 
-import com.bridgelabz.model.Appointment;
 import com.bridgelabz.model.Doctor;
 import com.bridgelabz.model.Patient;
-import com.bridgelabz.serviceimplementation.DoctorServiceImplementation;
 
 public class Utility {
 	public static Scanner scanner = new Scanner(System.in);
@@ -56,10 +61,10 @@ public class Utility {
         return arrayList;
 
     }
-	
+	// Read Doctor details
    public Doctor doctorDetails() {
 	    System.out.println("Enter Doctor name");
-	    userInputNextLine();
+	    //userInputNextLine();
 	    String name=userInputNextLine();
 	    System.out.println("Enter Doctor id");
 	    int id=userInputInteger();
@@ -72,9 +77,10 @@ public class Utility {
 	    doctor=new Doctor(name,id,time,specialization,count);
 	    return doctor;
    }
+   //Read Patient details
    public Patient patientDetails() {
 	   System.out.println("Enter Patient name");
-	   userInputNextLine();
+	   //userInputNextLine();
 	   String name=userInputNextLine();
 	   System.out.println("Enter patient id");
 	   int id=userInputInteger();

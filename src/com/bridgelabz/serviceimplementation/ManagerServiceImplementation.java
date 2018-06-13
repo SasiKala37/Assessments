@@ -277,7 +277,6 @@ public class ManagerServiceImplementation implements ManagerService {
 			try {
 				System.out.println(Utility.mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list));
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

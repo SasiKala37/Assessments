@@ -1,10 +1,11 @@
+/***
+ * Purpose: ManagerService interface to declare the methods of manager service
+ * 
+ * @author Sasikala
+ * @version 1.0
+ * @since 9-06-2018
+ * */
 package com.bridgelabz.service;
-
-import java.io.IOException;
-
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
 
 public interface ManagerService {
 	public void addDocotor() ;
