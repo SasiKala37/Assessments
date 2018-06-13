@@ -215,7 +215,7 @@ public class ManagerServiceImplementation implements ManagerService {
 		}
 
 	}
-
+	//Add appointment 
 	public void addAppointement(int index) throws JsonParseException, JsonMappingException, IOException {
 		appointmentList = Utility.parseJSONArray(appFile, Appointment.class);
 
@@ -239,7 +239,7 @@ public class ManagerServiceImplementation implements ManagerService {
 
 		Utility.mapper.writeValue(appFile, appointmentList);
 	}
-
+	//fix the appointement for patient to selected doctor
 	public void fixAppontement( String fixedDoctor)
 			throws JsonParseException, JsonMappingException, IOException {
 
@@ -267,6 +267,7 @@ public class ManagerServiceImplementation implements ManagerService {
 				System.out.println("Search for someother doctor");
 			}
 		}
+	//Print the  appointment report 
 	public void printReport() {
 		try {
 			appointmentList = Utility.parseJSONArray(appFile, Appointment.class);
