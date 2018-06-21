@@ -17,7 +17,6 @@ public class Sample {
 	             pstmt.executeUpdate();
 	            
 	        } catch (SQLException e) {
-	            // TODO Auto-generated catch block
 	            e.printStackTrace();
 	        }
 	         finally
@@ -37,7 +36,6 @@ public class Sample {
 	                         rst.close();
 	                     }
 	                } catch (SQLException e) {
-	                    // TODO Auto-generated catch block
 	                    e.printStackTrace();
 	                }
 	             

@@ -19,8 +19,12 @@ public class UserServiceImpl implements UserService {
 	public void login() throws SQLException {
 		boolean search = false;
 		String query = "select * from logindetails";
-		preparedStatement = con.prepareStatement(query);
-		rs = preparedStatement.executeQuery();
+		try {
+			preparedStatement = con.prepareStatement(query);
+			rs = preparedStatement.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		System.out.println("Enter user name without spaces");
 		String name = Utility.userInputString();
 		while (rs.next()) {
@@ -40,6 +44,7 @@ public class UserServiceImpl implements UserService {
 			System.out.println("Username not existed please register");
 			register();
 		}
+		
 	}
 
 	@Override
@@ -65,11 +70,11 @@ public class UserServiceImpl implements UserService {
 		pstmt = con.prepareStatement(query1);
 		preparedStatement = con.prepareStatement(query);
 		rs = preparedStatement.executeQuery();
-		
+
 		while (rs.next()) {
-			//System.out.println(rs.getInt(1)+" user id");
+			// System.out.println(rs.getInt(1)+" user id");
 			if (name.equals(rs.getString(2))) {
-				
+
 				System.out.println("Enter password");
 				String pwd = Utility.userInputString();
 
@@ -83,18 +88,16 @@ public class UserServiceImpl implements UserService {
 					System.out.println(
 							"password should consists of min of 8 chars along with special,upper,lower and digits");
 				}
-				search=true;
+				search = true;
 				break;
 			}
-			
+
 		}
-		if(!search) {
+		if (!search) {
 			System.out.println("user name not exist please register");
 			register();
 		}
-		
-		
+
 	}
-	
 
 }
