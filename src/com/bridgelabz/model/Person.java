@@ -1,3 +1,10 @@
+/**
+ * Purpose:Interface to specify the tasks of Addressbook manager
+ * 
+ * @author SasiKala
+ * @version 1.0
+ * @since 23-06-2018
+ * */
 package com.bridgelabz.model;
 
 public class Person {
@@ -9,35 +16,6 @@ public class Person {
 	private int zip;
 	private long phone;
 
-	/*
-	*//**
-	 * @param firstName
-	 *            the person's first name
-	 * @param lastName
-	 *            the person's last name
-	 * @param address
-	 *            the person's address
-	 * @param city
-	 *            the person's city
-	 * @param state
-	 *            the person's state
-	 * @param zip
-	 *            the person's zip
-	 * @param phone
-	 *            the person's phone
-	 *//*
-	public Person(String firstName, String lastName, String address, String city, String state, String zip,
-			String phone) {
-
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
-		this.city = city;
-		this.state = state;
-		this.zip = zip;
-		this.phone = phone;
-	}
-*/
 	public Person() {
 		
 	}
@@ -119,23 +97,5 @@ public class Person {
 		return phone;
 	}
 
-	/**
-	 * @param address
-	 *            the person's address
-	 * @param city
-	 *            the person's city
-	 * @param state
-	 *            the person's state
-	 * @param zip
-	 *            the person's zip
-	 * @param phone
-	 *            the person's phone
-	 *//*
-	public void update(String address, String city, String state, String zip, String phone) {
-		this.address = address;
-		this.city = city;
-		this.state = state;
-		this.zip = zip;
-		this.phone = phone;
-	}*/
+	
 }

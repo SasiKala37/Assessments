@@ -1,6 +1,10 @@
 /**
+ * Purpose:Perform the read, write, update and delete operations with JSON file
  * 
- */
+ * @author SasiKala
+ * @version 1.0
+ * @since 23-06-2018
+ * */
 package com.bridgelabz.repository;
 
 import java.io.File;
@@ -15,10 +19,6 @@ import org.codehaus.jackson.map.type.CollectionType;
 
 import com.bridgelabz.model.Person;
 
-/**
- * @author bridgelabz
- *
- */
 public class JsonFileParsing implements FileParsing {
 	static ObjectMapper mapper = new ObjectMapper();
 	ArrayList<Person> personList = new ArrayList<>();
@@ -62,6 +62,7 @@ public class JsonFileParsing implements FileParsing {
 		if (!found) {
 			System.out.println("Addressbook not found");
 		}
+		
 		return file;
 	}
 
@@ -76,6 +77,11 @@ public class JsonFileParsing implements FileParsing {
 	public void open(String addressBook) {
 		try {
 			SelectAddressBook(addressBook);
+			File file = new File("/home/bridgelabz/Documents/addressbook/" + addressBook + ".json");
+			personList=parseJSONArray(file, Person.class);
+			for(Person person:personList) {
+				System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(person));
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -1,3 +1,10 @@
+/**
+ * Purpose:Utility class to write repeatedly used static methods
+ * 
+ * @author SasiKala
+ * @version 1.0
+ * @since 23-06-2018
+ * */
 package com.bridgelabz.util;
 
 import java.util.Scanner;

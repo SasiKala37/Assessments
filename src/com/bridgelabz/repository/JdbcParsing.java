@@ -1,3 +1,10 @@
+/**
+ * Purpose: To perform the CURD operation with database
+ * 
+ * @author SasiKala
+ * @version 1.0
+ * @since 23-06-2018
+ * */
 package com.bridgelabz.repository;
 
 import java.beans.PropertyVetoException;
@@ -21,6 +28,11 @@ public class JdbcParsing implements FileParsing {
 	ResultSet resultSet = null;
 	ArrayList<Person> personList = new ArrayList<>();
 
+	/**
+	 * Establish the connection with JDBc
+	 * 
+	 * @return database connection
+	 */
 	public Connection setConnection() {
 		try {
 			connection = DataSource.getInstance().getConnection();
@@ -32,22 +44,18 @@ public class JdbcParsing implements FileParsing {
 
 	@Override
 	public void create(String addressBookName) {
-
-		/*
-		 * System.out.println("Enter the new address book table name"); String
-		 * addressBookName = Utility.userInputString();
-		 */
 		String insert = "insert into address_book values('" + addressBookName + "')";
 		Statement statement1 = null;
 		String query = "create table " + addressBookName
 				+ "(id int(2) auto_increment,first_name varchar(15),last_name varchar(10),address varchar(20),city varchar(20),state varchar(3),zip int(5),phone int(10),primary key(id))";
 		try {
 			statement = setConnection().createStatement();
-			statement.execute(query);
-			System.out.println("new AddressBook Created");
-
+			boolean result = statement.execute(query);
 			statement1 = setConnection().createStatement();
 			statement1.execute(insert);
+			if (!result) {
+				System.out.println("new AddressBook Created");
+			}
 			closeConnection();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -58,25 +66,37 @@ public class JdbcParsing implements FileParsing {
 	@Override
 	public void open(String addressBook) {
 		boolean found = false;
-		
+		Statement statement1 = null;
+		ResultSet resultSet1 = null;
 		String addressBooks = "select * from address_book";
+		String select = "select * from " + addressBook;
 		try {
 			statement = setConnection().createStatement();
 			resultSet = statement.executeQuery(addressBooks);
+			statement1 = setConnection().createStatement();
+			resultSet1 = statement1.executeQuery(select);
 			while (resultSet.next()) {
 				if (resultSet.getString(1).equalsIgnoreCase(addressBook)) {
-					System.out.println("address book found");
+					System.out.println("address book found\n");
 					found = true;
 					break;
 				}
+			}
+			if (!found) {
+				System.out.println("address book found\n");
+			}
+			while (resultSet1.next()) {
+				System.out.println("person id:" + resultSet1.getInt(1) + "\n" + "first name:" + resultSet1.getString(2)
+						+ "\n" + "last name:" + resultSet1.getString(3) + "\n" + "Address:" + resultSet1.getString(4)
+						+ "\n" + "City:" + resultSet1.getString(5) + "\n" + "State:" + resultSet1.getString(6) + "\n"
+						+ "Zip:" + resultSet1.getInt(7) + "\n" + "Phone number:" + resultSet1.getLong(8));
+				System.out.println();
 			}
 			closeConnection();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		if (!found) {
-			System.out.println("address book not found");
-		}
+
 	}
 
 	@Override
@@ -146,6 +166,7 @@ public class JdbcParsing implements FileParsing {
 			preparedStatement.setLong(5, person.getPhone());
 			preparedStatement.setString(6, person.getFirstName());
 			preparedStatement.executeUpdate();
+
 			System.out.println("updated person address successfully");
 			closeConnection();
 		} catch (SQLException e) {
@@ -171,14 +192,20 @@ public class JdbcParsing implements FileParsing {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Close all the connections
+	 * 
+	 * @throws SQLException
+	 */
 	public void closeConnection() throws SQLException {
-		if(resultSet!=null) {
+		if (resultSet != null) {
 			resultSet.close();
 		}
-		if(statement!=null) {
+		if (statement != null) {
 			statement.close();
 		}
-		if(connection!=null) {
+		if (connection != null) {
 			connection.close();
 		}
 	}
